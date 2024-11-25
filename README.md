@@ -17,7 +17,7 @@ Spare Master is a simple online motorcycle/car spare parts store where users can
 ```bash
   $ npm install
   # or
-  $ yarn
+  $ yarn install
 ```
 
 - Run project
@@ -25,7 +25,7 @@ Spare Master is a simple online motorcycle/car spare parts store where users can
 ```bash
   $ npm run dev
   # or
-  $ yarn run dev
+  $ yarn dev
 ```
 
 - Build project
@@ -33,7 +33,7 @@ Spare Master is a simple online motorcycle/car spare parts store where users can
 ```bash
   $ npm run build
   # or
-  $ yarn run build
+  $ yarn build
 ```
 
 - Happy coding!
