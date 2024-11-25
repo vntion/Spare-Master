@@ -1,0 +1,17 @@
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+/*
+    Create table pembelian
+*/
+CREATE TABLE IF NOT EXISTS `pembelian` (
+    id INT(45) NOT NULL AUTO_INCREMENT,
+    isPaid BOOLEAN NOT NULL,
+    totalHarga DECIMAL(12, 2) NOT NULL,
+    alamat TEXT NOT NULL,
+    produkId INT(45) NOT NULL,
+    akunId INT(45) NOT NULL,
+    createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    CONSTRAINT fk_produk FOREIGN KEY (produkId) REFERENCES produk(id) ON DELETE CASCADE,
+    CONSTRAINT fk_akun FOREIGN KEY (akunId) REFERENCES akun(id) ON DELETE CASCADE
+);

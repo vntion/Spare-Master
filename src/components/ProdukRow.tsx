@@ -1,0 +1,49 @@
+import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
+import { useToggleForm } from "../contexts/ToggleFormContext";
+import { formatRupiah } from "../utils/helpers";
+import { Produk } from "../utils/interfaces";
+import ProdukAction from "./ProdukAction";
+
+interface Props {
+  produk: Produk;
+}
+
+function ProdukRow({ produk }: Props) {
+  const formattedDeskripsi =
+    produk.deskripsi!.length > 40
+      ? `${produk.deskripsi!.slice(0, 40)}...`
+      : produk.deskripsi;
+  const { isOpenAction, currOpenAct, onOpenAction, onCurrOpenAct } =
+    useToggleForm();
+
+  const openAction = function () {
+    onOpenAction();
+    onCurrOpenAct(Number(produk.id));
+  };
+
+  return (
+    <div>
+      <div className="relative grid grid-cols-[1fr_2fr_3fr_1.5fr_1fr] items-center text-sm">
+        <img
+          src={produk.gambar}
+          alt={produk.nama}
+          className="h-[3rem] w-[5.3rem] object-cover"
+        />
+        <div>{produk.nama}</div>
+        <div className="text-sm">{formattedDeskripsi}</div>
+        <div>{formatRupiah(Number(produk.harga))}</div>
+        <div className="justify-self-end pr-3">
+          <button onClick={openAction}>
+            <EllipsisVerticalIcon className="size-6" />
+          </button>
+        </div>
+
+        {isOpenAction && currOpenAct === Number(produk.id) && (
+          <ProdukAction produk={produk} />
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default ProdukRow;
