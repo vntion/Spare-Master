@@ -4,7 +4,7 @@ Spare Master is a simple online motorcycle/car spare parts store where users can
 
 ## Installation
 
-#### How to install this project:
+**How to install this project:**
 
 - Clone this project inside `C:\xampp\htdocs` folder
 - Rename project folder to `Spare Master`
@@ -17,7 +17,7 @@ Spare Master is a simple online motorcycle/car spare parts store where users can
 ```bash
   $ npm install
   # or
-  $ yarn install
+  $ yarn
 ```
 
 - Run project
@@ -25,7 +25,7 @@ Spare Master is a simple online motorcycle/car spare parts store where users can
 ```bash
   $ npm run dev
   # or
-  $ yarn dev
+  $ yarn run dev
 ```
 
 - Build project
@@ -33,17 +33,17 @@ Spare Master is a simple online motorcycle/car spare parts store where users can
 ```bash
   $ npm run build
   # or
-  $ yarn build
+  $ yarn run build
 ```
 
 - Happy coding!
 
-#### Data
+**Data**
 
 - Create database with name `sparemaster`
 - Import the files `akun.sql`, `pembelian.sql`, and `produk.sql` located within the data folder.
 
-#### Login
+**Login**
 
 - Admin
 
@@ -64,3 +64,35 @@ Spare Master is a simple online motorcycle/car spare parts store where users can
   email: user3@gmail.com
   password: user3
 ```
+
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file
+
+`VITE_SESSION_KEY`
+
+## Tech Stack
+
+**Client:** React, React Router, TailwindCSS
+
+**Server:** PHP, MySQL
+
+**Other:** Integrate ESlint, Prettier, Functional programming with React hooks
+
+## Project Routes
+
+### Public Routes
+
+- **Home**: `/`
+- **Product detail**: `/produk/:id`
+- **Search product**: `/search/:query`
+- **Login**: `/login`
+- **Sign up**: `/signup`
+- **Thank you**: `/thankyou`
+- **404**: Page not found
+
+### Private Routes
+
+- **Dashboard**: `/admin/dashboard`
+- **Pembelian**: `/admin/pembelian`
+- **Produk**: `/admin/produk`
