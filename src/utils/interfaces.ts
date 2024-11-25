@@ -42,6 +42,16 @@ export interface ProdukActionProps {
   produk: Produk;
 }
 
+export interface StatProps {
+  title: string;
+  value: number;
+  color: "orange" | "blue" | "indigo";
+}
+
+export interface LogoutBtnProps {
+  color: "blue" | "black";
+}
+
 export interface Akun {
   id: string;
   nama: string;

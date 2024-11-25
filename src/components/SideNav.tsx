@@ -10,8 +10,10 @@ function SideNav() {
   const currLocation: string = location.pathname.replace("/admin/", "");
 
   return (
-    <div className="border-r border-r-[#999]/30 bg-white p-4">
-      <h1 className="mb-8 mt-4 text-center text-2xl font-bold">Spare Master</h1>
+    <div className="border-r border-r-[#999]/30 bg-white p-4 dark:border-r-[#777]/10 dark:bg-[#161e2a] dark:text-white">
+      <h1 className="mb-8 mt-4 text-center text-2xl font-bold dark:text-gray-100">
+        Spare Master
+      </h1>
 
       <nav className="sidenav">
         <ul>

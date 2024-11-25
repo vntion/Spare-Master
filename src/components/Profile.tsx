@@ -14,7 +14,7 @@ function Profile() {
             <UserCircleIcon className="size-6" />
             <span>{name.split(" ")[0]}</span>
           </div>
-          <LogoutButton />
+          <LogoutButton color="black" />
         </>
       ) : (
         <>

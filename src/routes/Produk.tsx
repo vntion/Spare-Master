@@ -1,5 +1,6 @@
 import Pagination from "../components/Pagination";
 import ProdukRow from "../components/ProdukRow";
+import RouteTitle from "../components/RouteTitle";
 import { useData } from "../contexts/DataContext";
 import { useToggleForm } from "../contexts/ToggleFormContext";
 
@@ -14,11 +15,11 @@ function Produk() {
 
   return (
     <div className="flex h-full flex-col">
-      <h1 className="mb-7 text-4xl font-bold">Produk</h1>
+      <RouteTitle>Produk</RouteTitle>
 
       <div className="flex flex-1 flex-col overflow-hidden rounded-md border border-[#999]/30">
         {/* Table Header */}
-        <div className="grid grid-cols-[1fr_2fr_3fr_1.5fr_1fr] items-center border-b border-b-[#999]/30 py-3 font-semibold">
+        <div className="grid grid-cols-[1fr_2fr_3fr_1.5fr_1fr] items-center border-b border-b-[#999]/30 py-3 font-semibold dark:text-white">
           <div></div>
           <div>Nama</div>
           <div>Deskripsi</div>
@@ -27,7 +28,7 @@ function Produk() {
         </div>
 
         {/* Table Body */}
-        <div className="flex flex-1 flex-col overflow-y-auto bg-white">
+        <div className="flex flex-1 flex-col overflow-y-auto bg-white dark:bg-[#161e2a]">
           <Pagination msg="produk">
             {produk.map((item, i) => (
               <ProdukRow produk={item} key={i} />

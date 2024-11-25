@@ -10,7 +10,7 @@ function AdminLayout() {
       <SideNav />
       <div className="flex flex-col">
         <AdminHeader />
-        <main className="flex-1 px-12 py-8">
+        <main className="flex-1 px-12 py-8 dark:bg-[#0f1721]">
           <Outlet />
         </main>
       </div>

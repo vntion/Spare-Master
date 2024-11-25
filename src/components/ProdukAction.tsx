@@ -36,10 +36,10 @@ function ProdukAction({ produk }: ProdukActionProps) {
   };
 
   return (
-    <div className="absolute right-8 top-3 z-[1000] flex flex-col rounded bg-white p-1 shadow-lg *:p-2">
+    <div className="absolute right-8 top-3 z-[1000] flex flex-col rounded bg-white p-1 shadow-lg *:p-2 dark:text-black">
       <button
         onClick={handleEditProduk}
-        className="flex gap-1 rounded-sm hover:bg-gray-50"
+        className="flex gap-1 rounded-sm hover:bg-gray-100 dark:hover:bg-gray-200"
       >
         <PencilSquareIcon className="size-5" />
         <span>Edit</span>
@@ -47,7 +47,7 @@ function ProdukAction({ produk }: ProdukActionProps) {
 
       <button
         onClick={handleDeleteProduk}
-        className="flex gap-1 rounded-sm hover:bg-gray-50"
+        className="flex gap-1 rounded-sm hover:bg-gray-100 dark:hover:bg-gray-200"
       >
         <TrashIcon className="size-5" />
         <span>Hapus</span>

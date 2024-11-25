@@ -22,26 +22,24 @@ function ProdukRow({ produk }: Props) {
   };
 
   return (
-    <div>
-      <div className="relative grid grid-cols-[1fr_2fr_3fr_1.5fr_1fr] items-center text-sm">
-        <img
-          src={produk.gambar}
-          alt={produk.nama}
-          className="h-[3rem] w-[5.3rem] object-cover"
-        />
-        <div>{produk.nama}</div>
-        <div className="text-sm">{formattedDeskripsi}</div>
-        <div>{formatRupiah(Number(produk.harga))}</div>
-        <div className="justify-self-end pr-3">
-          <button onClick={openAction}>
-            <EllipsisVerticalIcon className="size-6" />
-          </button>
-        </div>
-
-        {isOpenAction && currOpenAct === Number(produk.id) && (
-          <ProdukAction produk={produk} />
-        )}
+    <div className="relative grid grid-cols-[1fr_2fr_3fr_1.5fr_1fr] items-center text-sm dark:text-white">
+      <img
+        src={produk.gambar}
+        alt={produk.nama}
+        className="h-[3.2rem] w-[5.3rem] object-cover"
+      />
+      <div>{produk.nama}</div>
+      <div className="text-sm">{formattedDeskripsi}</div>
+      <div>{formatRupiah(Number(produk.harga))}</div>
+      <div className="justify-self-end pr-3">
+        <button onClick={openAction}>
+          <EllipsisVerticalIcon className="size-6" />
+        </button>
       </div>
+
+      {isOpenAction && currOpenAct === Number(produk.id) && (
+        <ProdukAction produk={produk} />
+      )}
     </div>
   );
 }

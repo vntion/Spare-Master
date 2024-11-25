@@ -12,9 +12,9 @@ function ProdukList() {
       try {
         const res = await getAllProduk();
         setProduk(res);
-      } catch (e) {
-        if (e instanceof CustomError) {
-          setError(e.message);
+      } catch (err) {
+        if (err instanceof CustomError) {
+          setError(err.message);
         }
       }
     };

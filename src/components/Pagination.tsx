@@ -27,7 +27,7 @@ function Pagination({ msg, children }: Props) {
 
   return (
     <>
-      <div className="flex-1 divide-y overflow-visible">
+      <div className="flex-1 divide-y overflow-visible dark:divide-[#777]/10">
         {childrenArray.slice(page * 10, 10 * (page + 1))}
       </div>
       <PaginationButton

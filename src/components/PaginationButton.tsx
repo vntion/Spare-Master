@@ -9,7 +9,7 @@ interface Props {
 
 function PaginationButton({ totalData, page, onNext, onPrev }: Props) {
   return (
-    <div className="flex justify-between bg-primaryBg px-4 py-3 text-sm">
+    <div className="flex justify-between bg-primaryBg px-4 py-3 text-sm dark:bg-[#0f1721] dark:text-gray-100">
       <div>
         Menampilkan <span className="font-bold">{page * 10 + 1}</span> hingga{" "}
         <span className="font-bold">

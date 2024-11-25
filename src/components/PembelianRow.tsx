@@ -15,7 +15,7 @@ function PembelianRow({ pembelian }: Props) {
       : pembelian.alamat;
 
   return (
-    <div className="grid grid-cols-[1.1fr_2fr_2fr_1.5fr_1.2fr] items-center p-3">
+    <div className="grid grid-cols-[1.1fr_2fr_2fr_1.5fr_1.2fr] items-center p-3 dark:text-white">
       <div>{pembelian.produkId}</div>
       <div className="overflow-x-auto">{formattedAlamat}</div>
       <div>{formattedDate}</div>
