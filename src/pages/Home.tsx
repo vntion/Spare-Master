@@ -1,7 +1,7 @@
 import Footer from "../ui/Footer";
 import Hero from "../ui/Hero";
 import NavBar from "../ui/NavBar";
-import ProdukList from "../components/ProdukList";
+import ProdukList from "../components/produk/ProdukList";
 
 function Home() {
   return (

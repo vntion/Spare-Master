@@ -1,6 +1,6 @@
 import { UserCircleIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../../contexts/AuthContext";
 import LogoutButton from "./LogoutButton";
 
 function Profile() {

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { useToggleForm } from "../contexts/ToggleFormContext";
+import { useToggleForm } from "../../contexts/ToggleFormContext";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import { CreateProduk, UpdateProduk } from "../utils/interfaces";
-import { createProduk, updateProduk } from "../services/apiProduk";
-import { CustomError } from "../utils/helpers";
-import { useData } from "../contexts/DataContext";
+import { CreateProduk, UpdateProduk } from "../../utils/interfaces";
+import { createProduk, updateProduk } from "../../services/apiProduk";
+import { CustomError } from "../../utils/helpers";
+import { useData } from "../../contexts/DataContext";
 
 function ProdukForm() {
   const { selectedProduk, isOpen, onCloseForm } = useToggleForm();

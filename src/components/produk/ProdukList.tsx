@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ProdukCard from "./ProdukCard";
-import { CustomError } from "../utils/helpers";
-import { getAllProduk } from "../services/apiProduk";
+import { CustomError } from "../../utils/helpers";
+import { getAllProduk } from "../../services/apiProduk";
 
 function ProdukList() {
   const [produk, setProduk] = useState([]);

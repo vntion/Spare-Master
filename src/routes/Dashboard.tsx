@@ -1,5 +1,5 @@
-import RouteTitle from "../components/RouteTitle";
-import Stat from "../components/Stat";
+import RouteTitle from "../ui/RouteTitle";
+import Stat from "../ui/Stat";
 import { useData } from "../contexts/DataContext";
 
 function Dashboard() {

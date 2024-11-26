@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { formatRupiah } from "../utils/helpers";
+import { formatRupiah } from "../../utils/helpers";
 
 interface Props {
   id: number;

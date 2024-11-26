@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getProdukById } from "../services/apiProduk";
-import { CustomError, formatRupiah } from "../utils/helpers";
-import { Produk } from "../utils/interfaces";
-import BackButton from "./BackButton";
+import { getProdukById } from "../../services/apiProduk";
+import { CustomError, formatRupiah } from "../../utils/helpers";
+import { Produk } from "../../utils/interfaces";
+import BackButton from "../../ui/BackButton";
 import FormBeli from "./FormBeli";
-import Spinner from "../ui/Spinner";
+import Spinner from "../../ui/Spinner";
 
 function ProdukDetailCard() {
   const [produk, setProduk] = useState<Produk>({});
@@ -52,9 +52,9 @@ function ProdukDetailCard() {
                 {deskripsi}
               </p>
               <span className="mb-auto mt-3 inline-block text-4xl font-medium">
-                {formatRupiah(harga)}
+                {formatRupiah(Number(harga))}
               </span>
-              <FormBeli harga={harga} id={Number(id)} />
+              <FormBeli harga={Number(harga)} id={Number(id)} />
             </div>
           </div>
         </>

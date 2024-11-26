@@ -1,38 +1,44 @@
-import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
-import { useState } from "react";
-import { Akun, SignUp } from "../utils/interfaces";
-import { createAkun } from "../services/apiAkun";
-import { CustomError } from "../utils/helpers";
-import { useAuth } from "../contexts/AuthContext";
-import { createSession } from "../utils/session";
-import { useNavigate } from "react-router-dom";
+import {
+  EnvelopeIcon,
+  EyeIcon,
+  EyeSlashIcon,
+  LockClosedIcon,
+} from "@heroicons/react/24/outline";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { CustomError } from "../../utils/helpers";
+import { getAkun } from "../../services/apiAkun";
+import { Akun } from "../../utils/interfaces";
+import { createSession } from "../../utils/session";
+import { useAuth } from "../../contexts/AuthContext";
 
-function SignUpForm() {
-  const [nama, setNama] = useState<string>("");
+function LoginForm() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [isShowPass, setIsShowPass] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
-
-  const { onName, onRole } = useAuth();
   const navigate = useNavigate();
+  const { onAuth, onName, onRole } = useAuth();
 
   const handleSubmit = async function (e: React.ChangeEvent<HTMLFormElement>) {
     e.preventDefault();
-    try {
-      const signUp: SignUp = {
-        nama: nama.trim(),
-        email: email.trim(),
-        password: password.trim(),
-        role: "user",
-      };
 
-      const res = await createAkun(signUp);
-      const data: Akun = res.data;
+    if (!email || !password) return;
+
+    try {
+      const data: Akun = await getAkun(email, password);
+      await createSession(data);
       onName(data.nama);
       onRole(data.role);
-      await createSession(data);
-      navigate("/");
+      if (data.role === "admin") {
+        onAuth(true);
+        navigate("/admin");
+      }
+
+      if (data.role === "user") {
+        onAuth(false);
+        navigate("/");
+      }
     } catch (err) {
       if (err instanceof CustomError) {
         setError(err.message);
@@ -45,30 +51,15 @@ function SignUpForm() {
       onSubmit={handleSubmit}
       className="basis-[24rem] rounded-md bg-white p-4"
     >
-      <h1 className="mb-4 text-center text-3xl font-semibold">Sign up</h1>
+      <h1 className="mb-4 text-center text-3xl font-semibold">Login</h1>
 
-      {error && <p className="text-center text-sm text-red-500">{error}</p>}
-      <div className="mb-3 space-y-1">
-        <label htmlFor="nama">Nama</label>
-        <div className="flex items-center gap-2 rounded bg-[#EEF0F2] p-2">
-          <input
-            type="text"
-            id="nama"
-            required
-            placeholder="Masukkan nama..."
-            className="flex-1 bg-transparent outline-none"
-            autoComplete="off"
-            value={nama}
-            onChange={(e) => {
-              setNama(e.target.value);
-            }}
-          />
-        </div>
-      </div>
-
+      {error && <p className="text-center text-red-500">{error}</p>}
       <div className="mb-3 space-y-1">
         <label htmlFor="email">Email</label>
         <div className="flex items-center gap-2 rounded bg-[#EEF0F2] p-2">
+          <label htmlFor="email">
+            <EnvelopeIcon className="size-6" />
+          </label>
           <input
             type="email"
             id="email"
@@ -87,6 +78,9 @@ function SignUpForm() {
       <div className="space-y-1">
         <label htmlFor="password">Password</label>
         <div className="flex items-center gap-2 rounded bg-[#EEF0F2] p-2">
+          <label htmlFor="password">
+            <LockClosedIcon className="size-6" />
+          </label>
           <input
             type={isShowPass ? "text" : "password"}
             id="password"
@@ -119,12 +113,19 @@ function SignUpForm() {
 
       <button
         type="submit"
-        className="mt-12 w-full rounded bg-primary py-2 text-white"
+        className="mt-16 w-full rounded bg-primary py-2 text-white"
       >
-        Sign up
+        Login
       </button>
+
+      <p className="mt-2 text-center text-[0.78rem]">
+        Belum punya akun?{" "}
+        <Link to="/signup" className="text-blue-600">
+          Buat akun
+        </Link>
+      </p>
     </form>
   );
 }
 
-export default SignUpForm;
+export default LoginForm;

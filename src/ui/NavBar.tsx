@@ -1,6 +1,6 @@
 import Logo from "./Logo";
-import Profile from "../components/Profile";
-import SearchForm from "../components/SearchForm";
+import Profile from "../components/akun/Profile";
+import SearchForm from "../components/produk/SearchForm";
 
 function NavBar() {
   return (

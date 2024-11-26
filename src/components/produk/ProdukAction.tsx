@@ -1,8 +1,8 @@
 import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
-import { deleteProduk } from "../services/apiProduk";
-import { ProdukActionProps } from "../utils/interfaces";
-import { useData } from "../contexts/DataContext";
-import { useToggleForm } from "../contexts/ToggleFormContext";
+import { deleteProduk } from "../../services/apiProduk";
+import { ProdukActionProps } from "../../utils/interfaces";
+import { useData } from "../../contexts/DataContext";
+import { useToggleForm } from "../../contexts/ToggleFormContext";
 
 function ProdukAction({ produk }: ProdukActionProps) {
   const { onDeleteProduk } = useData();

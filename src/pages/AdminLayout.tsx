@@ -1,8 +1,9 @@
 import { Outlet } from "react-router-dom";
-import AdminHeader from "../components/AdminHeader";
-import SideNav from "../components/SideNav";
-import Overlay from "../components/Overlay";
-import ProdukForm from "../components/ProdukForm";
+
+import SideNav from "../ui/SideNav";
+import Overlay from "../ui/Overlay";
+import ProdukForm from "../components/produk/ProdukForm";
+import AdminHeader from "../components/akun/AdminHeader";
 
 function AdminLayout() {
   return (

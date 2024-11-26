@@ -1,6 +1,6 @@
 import Footer from "../ui/Footer";
 import NavBar from "../ui/NavBar";
-import ProdukDetailCard from "../components/ProdukDetailCard";
+import ProdukDetailCard from "../components/produk/ProdukDetailCard";
 
 function ProdukDetail() {
   return (

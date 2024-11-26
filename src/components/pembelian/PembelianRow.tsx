@@ -1,6 +1,6 @@
 import { format } from "date-fns";
-import { Pembelian } from "../utils/interfaces";
-import { formatRupiah } from "../utils/helpers";
+import { Pembelian } from "../../utils/interfaces";
+import { formatRupiah } from "../../utils/helpers";
 
 interface Props {
   pembelian: Pembelian;

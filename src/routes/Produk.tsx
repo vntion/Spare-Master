@@ -1,6 +1,6 @@
-import Pagination from "../components/Pagination";
-import ProdukRow from "../components/ProdukRow";
-import RouteTitle from "../components/RouteTitle";
+import Pagination from "../components/pagination/Pagination";
+import ProdukRow from "../components/produk/ProdukRow";
+import RouteTitle from "../ui/RouteTitle";
 import { useData } from "../contexts/DataContext";
 import { useToggleForm } from "../contexts/ToggleFormContext";
 

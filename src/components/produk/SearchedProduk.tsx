@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getProdukByQuery } from "../services/apiProduk";
-import ProdukCard from "./ProdukCard";
+import ProdukCard from "./produk/ProdukCard";
 import { CustomError } from "../utils/helpers";
 import Spinner from "../ui/Spinner";
 

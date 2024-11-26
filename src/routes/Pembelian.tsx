@@ -1,6 +1,6 @@
-import Pagination from "../components/Pagination";
-import PembelianRow from "../components/PembelianRow";
-import RouteTitle from "../components/RouteTitle";
+import Pagination from "../components/pagination/Pagination";
+import PembelianRow from "../components/pembelian/PembelianRow";
+import RouteTitle from "../ui/RouteTitle";
 import { useData } from "../contexts/DataContext";
 
 function Pembelian() {
