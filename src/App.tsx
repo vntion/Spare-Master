@@ -14,6 +14,7 @@ import { DataProvider } from "./contexts/DataContext";
 import { AuthProvider } from "./contexts/AuthContext";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import { ToggleFormProvider } from "./contexts/ToggleFormContext";
+import User from "./routes/User";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="pembelian" element={<Pembelian />} />
             <Route path="produk" element={<Produk />} />
+            <Route path="user" element={<User />} />
           </Route>
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<SignUp />} />

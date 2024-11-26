@@ -44,7 +44,7 @@ switch ($request_method) {
 // Get akun
 function getAkun($password, $email, $CRUD)
 {
-    $query = "SELECT id, nama, email, role FROM akun";
+    $query = "SELECT id, nama, email, password, role FROM akun";
 
     if ($password && $email) {
         $query .= " WHERE password='{$password}' AND email='{$email}'";

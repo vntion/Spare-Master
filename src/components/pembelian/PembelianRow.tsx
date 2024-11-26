@@ -15,7 +15,7 @@ function PembelianRow({ pembelian }: Props) {
   const formattedEmail = formatString(pembelian.email, 25);
 
   return (
-    <div className="grid grid-cols-[1.5fr_1.5fr_2fr_1.5fr_1fr_1.2fr] items-center p-3 dark:text-white">
+    <div className="grid grid-cols-[1.5fr_1.5fr_2fr_1.5fr_1fr_1.2fr] items-center p-3 text-sm dark:text-white">
       <div>{formattedProduk}</div>
       <div className="flex flex-col gap-1">
         <span>{formattedPembeli}</span>

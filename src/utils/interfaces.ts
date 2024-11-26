@@ -58,6 +58,7 @@ export interface Akun {
   id: string;
   nama: string;
   email: string;
+  password: string;
   role: Role;
 }
 
@@ -88,6 +89,7 @@ export interface Session {
 export interface DataContextType {
   produk: Produk[];
   pembelian: Pembelian[];
+  user: Akun[];
   onAddProduk: (newProduk: Produk) => void;
   onDeleteProduk: (id: string) => void;
   onEditProduk: (edittedProduk: Produk) => void;

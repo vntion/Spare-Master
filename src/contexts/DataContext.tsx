@@ -64,6 +64,7 @@ function DataProvider({ children }: Props) {
       value={{
         produk,
         pembelian,
+        user,
         onAddProduk: handleAddProduk,
         onDeleteProduk: handleDeleteProduk,
         onEditProduk: handleEditProduk,

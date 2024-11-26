@@ -3,6 +3,9 @@ import ProdukRow from "../components/produk/ProdukRow";
 import RouteTitle from "../ui/RouteTitle";
 import { useData } from "../contexts/DataContext";
 import { useToggleForm } from "../contexts/ToggleFormContext";
+import Table from "../components/table/Table";
+import TableHead from "../components/table/TableHead";
+import TableBody from "../components/table/TableBody";
 
 function Produk() {
   const { onSelectProduk, onToggleOpen } = useToggleForm();
@@ -17,25 +20,23 @@ function Produk() {
     <div className="flex h-full flex-col">
       <RouteTitle>Produk</RouteTitle>
 
-      <div className="flex flex-1 flex-col overflow-hidden rounded-md border border-[#999]/30">
-        {/* Table Header */}
-        <div className="grid grid-cols-[1fr_2fr_3fr_1.5fr_1fr] items-center border-b border-b-[#999]/30 py-3 font-semibold dark:text-white">
+      <Table>
+        <TableHead cols="produk">
           <div></div>
           <div>Nama</div>
           <div>Deskripsi</div>
           <div>Harga</div>
           <div></div>
-        </div>
+        </TableHead>
 
-        {/* Table Body */}
-        <div className="flex flex-1 flex-col overflow-y-auto bg-white dark:bg-[#161e2a]">
+        <TableBody>
           <Pagination msg="produk">
             {produk.map((item, i) => (
               <ProdukRow produk={item} key={i} />
             ))}
           </Pagination>
-        </div>
-      </div>
+        </TableBody>
+      </Table>
 
       <button
         onClick={openForm}

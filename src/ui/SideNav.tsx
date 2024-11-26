@@ -2,6 +2,7 @@ import {
   ArchiveBoxIcon,
   CreditCardIcon,
   HomeIcon,
+  UserGroupIcon,
 } from "@heroicons/react/24/outline";
 import { NavLink, useLocation } from "react-router-dom";
 
@@ -48,6 +49,17 @@ function SideNav() {
                 className={`size-5 ${currLocation === "produk" ? "text-primary" : ""}`}
               />
               Produk
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="user"
+              className="flex items-center gap-2 rounded-md px-2 py-3 font-medium"
+            >
+              <UserGroupIcon
+                className={`size-5 ${currLocation === "user" ? "text-primary" : ""}`}
+              />
+              User
             </NavLink>
           </li>
         </ul>
