@@ -1,7 +1,7 @@
 import { UserCircleIcon } from "@heroicons/react/24/outline";
-import { useAuth } from "../contexts/AuthContext";
-import LogoutButton from "./akun/LogoutButton";
-import DarkModeToggle from "./DarkModeToggle";
+import { useAuth } from "../../contexts/AuthContext";
+import DarkModeToggle from "../theme/DarkModeToggle";
+import LogoutButton from "./LogoutButton";
 
 function AdminHeader() {
   const { name } = useAuth();

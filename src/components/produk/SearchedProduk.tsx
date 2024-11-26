@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getProdukByQuery } from "../services/apiProduk";
-import ProdukCard from "./produk/ProdukCard";
-import { CustomError } from "../utils/helpers";
-import Spinner from "../ui/Spinner";
+import { getProdukByQuery } from "../../services/apiProduk";
+import { CustomError } from "../../utils/helpers";
+import Spinner from "../../ui/Spinner";
+import ProdukCard from "./ProdukCard";
 
 function SearchedProduk() {
   const [searchedProduk, setSearchedProduk] = useState([]);

@@ -1,6 +1,6 @@
+import SearchedProduk from "../components/produk/SearchedProduk";
 import Footer from "../ui/Footer";
 import NavBar from "../ui/NavBar";
-import SearchedProduk from "../components/SearchedProduk";
 
 function SearchProduk() {
   return (
