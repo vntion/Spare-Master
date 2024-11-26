@@ -19,7 +19,7 @@ function PembelianRow({ pembelian }: Props) {
       <div>{formattedProduk}</div>
       <div className="flex flex-col gap-1">
         <span>{formattedPembeli}</span>
-        <span className="w-min rounded bg-primaryBg px-[0.2rem] py-[0.1rem] text-xs text-gray-600 dark:bg-[#0f1721] dark:text-gray-100">
+        <span className="w-min rounded bg-primaryBg px-[0.2rem] py-[0.1rem] text-xs text-gray-600 dark:bg-[#0f1721] dark:text-gray-400">
           {formattedEmail}
         </span>
       </div>
