@@ -1,9 +1,10 @@
 import { Outlet } from "react-router-dom";
 
-import SideNav from "../ui/SideNav";
-import Overlay from "../ui/Overlay";
-import ProdukForm from "../components/produk/ProdukForm";
 import AdminHeader from "../components/akun/AdminHeader";
+import ProdukForm from "../components/produk/ProdukForm";
+import Overlay from "../ui/Overlay";
+import SideNav from "../ui/SideNav";
+import SnackBar from "../ui/SnackBar";
 
 function AdminLayout() {
   return (
@@ -16,6 +17,7 @@ function AdminLayout() {
         </main>
       </div>
       <ProdukForm />
+      <SnackBar />
       <Overlay />
     </div>
   );

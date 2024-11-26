@@ -1,4 +1,4 @@
-import { OpenForm, Role } from "./types";
+import { OpenForm, Role, SnackBarStatus } from "./types";
 
 export interface CreatePembelian {
   isPaid: boolean;
@@ -42,6 +42,13 @@ export interface Pembelian {
 
 export interface ProdukActionProps {
   produk: Produk;
+}
+
+export interface SnackBarProps {
+  isVisible: boolean;
+  status: SnackBarStatus;
+  msg: string;
+  onCloseSnackBar: () => void;
 }
 
 export interface StatProps {
@@ -121,4 +128,14 @@ export interface ToggleFormContextType {
   onCurrOpenAct: (id: number | null) => void;
   onOpenAction: () => void;
   onCloseAction: () => void;
+}
+
+export interface SnackBarContextType {
+  isVisible: boolean;
+  status: SnackBarStatus;
+  msg: string;
+  closeSnackBar: () => void;
+  showSnackBar: () => void;
+  onSnackBarStatus: (status: SnackBarStatus) => void;
+  onSnackBarMsg: (msg: string) => void;
 }

@@ -5,10 +5,13 @@ import { CreateProduk, UpdateProduk } from "../../utils/interfaces";
 import { createProduk, updateProduk } from "../../services/apiProduk";
 import { CustomError } from "../../utils/helpers";
 import { useData } from "../../contexts/DataContext";
+import { useSnackBar } from "../../contexts/SnackBarContext";
+import { SnackBarStatus } from "../../utils/types";
 
 function ProdukForm() {
   const { selectedProduk, isOpen, onCloseForm } = useToggleForm();
   const { onAddProduk, onEditProduk } = useData();
+  const { showSnackBar, onSnackBarMsg, onSnackBarStatus } = useSnackBar();
 
   const [nama, setNama] = useState<string>("");
   const [harga, setHarga] = useState<string | number>("");
@@ -16,11 +19,26 @@ function ProdukForm() {
   const [gambar, setGambar] = useState<string>("");
   const [error, setError] = useState<string>("");
 
+  const openSnackBar = function (msg: string, status: SnackBarStatus) {
+    showSnackBar();
+    onSnackBarMsg(msg);
+    onSnackBarStatus(status);
+  };
+
   const resetInput = function () {
     setNama("");
     setHarga("");
     setDeskripsi("");
     setGambar("");
+  };
+
+  const cancelSubmit = function () {
+    onCloseForm();
+    setNama("");
+    setHarga("");
+    setDeskripsi("");
+    setGambar("");
+    setError("");
   };
 
   const handleSubmit = async function (e: React.ChangeEvent<HTMLFormElement>) {
@@ -40,10 +58,12 @@ function ProdukForm() {
         onAddProduk(res);
         onCloseForm();
         resetInput();
+        openSnackBar("Produk berhasil di tambah!", "success");
         return;
       } catch (err) {
         if (err instanceof CustomError) {
           setError(err.message);
+          openSnackBar(err.message, "error");
           return;
         }
       }
@@ -67,10 +87,12 @@ function ProdukForm() {
         });
         onCloseForm();
         resetInput();
+        openSnackBar("Produk berhasil di perbarui!", "success");
         return;
       } catch (err) {
         if (err instanceof CustomError) {
           setError(err.message);
+          openSnackBar(err.message, "error");
           return;
         }
       }
@@ -96,7 +118,7 @@ function ProdukForm() {
       onSubmit={handleSubmit}
       className="absolute left-1/2 top-1/2 z-50 flex w-[34rem] -translate-x-1/2 -translate-y-1/2 transform flex-col rounded-md bg-white px-5 py-2 text-sm shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] [&>div:not(:nth-last-child(2))]:border-b"
     >
-      <button className="absolute right-2" onClick={onCloseForm}>
+      <button className="absolute right-2" onClick={cancelSubmit}>
         <XMarkIcon className="size-4" />
       </button>
 
@@ -160,7 +182,7 @@ function ProdukForm() {
 
       <div className="mt-5 flex justify-end gap-3 border-none">
         <button
-          onClick={onCloseForm}
+          onClick={cancelSubmit}
           type="button"
           className="rounded border border-[#999] px-3 py-2 text-[#444] hover:bg-gray-100 hover:text-black"
         >

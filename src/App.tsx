@@ -15,6 +15,7 @@ import { AuthProvider } from "./contexts/AuthContext";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import { ToggleFormProvider } from "./contexts/ToggleFormContext";
 import User from "./routes/User";
+import { SnackBarProvider } from "./contexts/SnackBarContext";
 
 function App() {
   return (
@@ -29,9 +30,11 @@ function App() {
             element={
               <ProtectedRoute>
                 <DataProvider>
-                  <ToggleFormProvider>
-                    <AdminLayout />
-                  </ToggleFormProvider>
+                  <SnackBarProvider>
+                    <ToggleFormProvider>
+                      <AdminLayout />
+                    </ToggleFormProvider>
+                  </SnackBarProvider>
                 </DataProvider>
               </ProtectedRoute>
             }
