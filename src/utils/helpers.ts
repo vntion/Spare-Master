@@ -12,3 +12,7 @@ export function formatRupiah(nominal: number) {
     minimumFractionDigits: 0,
   }).format(nominal);
 }
+
+export function formatString(text: string, length: number) {
+  return text.length > length ? `${text.slice(0, length)}...` : text;
+}

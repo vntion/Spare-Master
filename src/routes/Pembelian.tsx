@@ -12,8 +12,9 @@ function Pembelian() {
 
       <div className="flex flex-1 flex-col overflow-hidden rounded-md border border-[#999]/30">
         {/* Table Header */}
-        <div className="grid grid-cols-[1.1fr_2fr_2fr_1.5fr_1.2fr] items-center border-b border-b-[#999]/30 p-3 font-semibold dark:text-white">
+        <div className="grid grid-cols-[1.5fr_1.5fr_2fr_1.5fr_1fr_1.2fr] items-center gap-2 border-b border-b-[#999]/30 p-3 font-semibold dark:text-white">
           <div>Produk</div>
+          <div>Pembeli</div>
           <div>Alamat</div>
           <div>Tanggal Beli</div>
           <div>Status</div>

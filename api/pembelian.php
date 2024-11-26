@@ -37,11 +37,27 @@ switch ($request_method) {
 // Get pembelian
 function getPembelian($CRUD)
 {
-    $query =
-        "SELECT isPaid, alamat, totalHarga, produkId, createdAt from pembelian";
+    $query = "
+        SELECT 
+            pembelian.isPaid, 
+            pembelian.alamat, 
+            pembelian.totalHarga, 
+            produk.nama AS produk, 
+            akun.nama AS pembeli, 
+            akun.email AS email, 
+            pembelian.createdAt As tanggalBeli
+        FROM 
+            pembelian
+        JOIN 
+            akun ON pembelian.akunId = akun.id
+        JOIN 
+            produk ON pembelian.produkId = produk.id
+    ";
+
     $res = $CRUD->read($query);
     $result = "";
     $count = mysqli_num_rows($res);
+
     if ($count > 0) {
         $getdata = [];
         while ($row = mysqli_fetch_assoc($res)) {
@@ -51,8 +67,10 @@ function getPembelian($CRUD)
     } else {
         $result = ["status" => false, "data" => []];
     }
+
     echo json_encode($result);
 }
+
 
 // Create pembelian
 function createPembelian($CRUD)

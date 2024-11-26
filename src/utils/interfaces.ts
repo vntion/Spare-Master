@@ -34,8 +34,10 @@ export interface Pembelian {
   isPaid: string;
   alamat: string;
   totalHarga: string;
-  produkId: string;
-  createdAt: string;
+  produk: string;
+  pembeli: string;
+  email: string;
+  tanggalBeli: string;
 }
 
 export interface ProdukActionProps {

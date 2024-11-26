@@ -1,6 +1,6 @@
 import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
 import { useToggleForm } from "../../contexts/ToggleFormContext";
-import { formatRupiah } from "../../utils/helpers";
+import { formatRupiah, formatString } from "../../utils/helpers";
 import { Produk } from "../../utils/interfaces";
 import ProdukAction from "./ProdukAction";
 
@@ -9,10 +9,8 @@ interface Props {
 }
 
 function ProdukRow({ produk }: Props) {
-  const formattedDeskripsi =
-    produk.deskripsi!.length > 40
-      ? `${produk.deskripsi!.slice(0, 40)}...`
-      : produk.deskripsi;
+  const formattedDeskripsi = formatString(produk!.deskripsi, 40);
+  const formattedNama = formatString(produk!.nama, 20);
   const { isOpenAction, currOpenAct, onOpenAction, onCurrOpenAct } =
     useToggleForm();
 
@@ -28,7 +26,7 @@ function ProdukRow({ produk }: Props) {
         alt={produk.nama}
         className="h-[3.2rem] w-[5.3rem] object-cover"
       />
-      <div>{produk.nama}</div>
+      <div>{formattedNama}</div>
       <div className="text-sm">{formattedDeskripsi}</div>
       <div>{formatRupiah(Number(produk.harga))}</div>
       <div className="justify-self-end pr-3">
