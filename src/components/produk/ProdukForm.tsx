@@ -11,18 +11,21 @@ import { SnackBarStatus } from "../../utils/types";
 function ProdukForm() {
   const { selectedProduk, isOpen, onCloseForm } = useToggleForm();
   const { onAddProduk, onEditProduk } = useData();
-  const { showSnackBar, onSnackBarMsg, onSnackBarStatus } = useSnackBar();
+  const { showSnackBar, onSnackBarMsg, onSnackBarStatus, closeSnackBar } =
+    useSnackBar();
 
   const [nama, setNama] = useState<string>("");
   const [harga, setHarga] = useState<string | number>("");
   const [deskripsi, setDeskripsi] = useState<string>("");
   const [gambar, setGambar] = useState<string>("");
-  const [error, setError] = useState<string>("");
 
   const openSnackBar = function (msg: string, status: SnackBarStatus) {
-    showSnackBar();
-    onSnackBarMsg(msg);
-    onSnackBarStatus(status);
+    closeSnackBar();
+    setTimeout(() => {
+      onSnackBarMsg(msg);
+      onSnackBarStatus(status);
+      showSnackBar();
+    }, 100);
   };
 
   const resetInput = function () {
@@ -38,7 +41,6 @@ function ProdukForm() {
     setHarga("");
     setDeskripsi("");
     setGambar("");
-    setError("");
   };
 
   const handleSubmit = async function (e: React.ChangeEvent<HTMLFormElement>) {
@@ -62,7 +64,6 @@ function ProdukForm() {
         return;
       } catch (err) {
         if (err instanceof CustomError) {
-          setError(err.message);
           openSnackBar(err.message, "error");
           return;
         }
@@ -91,7 +92,6 @@ function ProdukForm() {
         return;
       } catch (err) {
         if (err instanceof CustomError) {
-          setError(err.message);
           openSnackBar(err.message, "error");
           return;
         }
@@ -122,9 +122,6 @@ function ProdukForm() {
         <XMarkIcon className="size-4" />
       </button>
 
-      {error && (
-        <p className="translate-y-4 text-center text-red-500">{error}</p>
-      )}
       <div className="mt-3 grid grid-cols-[1fr_3fr] items-center gap-3 py-5">
         <label htmlFor="nama">Nama produk</label>
         <input

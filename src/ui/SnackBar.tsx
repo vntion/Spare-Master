@@ -6,7 +6,11 @@ function SnackBar() {
   const { closeSnackBar, isVisible, status, msg } = useSnackBar();
 
   useEffect(() => {
-    setTimeout(closeSnackBar, 5100);
+    const timeout = setTimeout(closeSnackBar, 5200);
+
+    return () => {
+      clearTimeout(timeout);
+    };
   }, [closeSnackBar]);
 
   if (!isVisible) return null;

@@ -1,7 +1,13 @@
-import { createContext, ReactNode, useContext, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useCallback,
+  useContext,
+  useState,
+} from "react";
+import { CustomError } from "../utils/helpers";
 import { SnackBarContextType } from "../utils/interfaces";
 import { SnackBarStatus } from "../utils/types";
-import { CustomError } from "../utils/helpers";
 
 interface Props {
   children: ReactNode;
@@ -17,14 +23,17 @@ function SnackBarProvider({ children }: Props) {
   const [snackBarMsg, setSnackBarMsg] = useState<string>("");
 
   const showSnackBar = function () {
-    setSnackBarVisible(true);
+    setSnackBarVisible(false); // Reset state dulu
+    setTimeout(() => {
+      setSnackBarVisible(true);
+    }, 0);
   };
 
-  const closeSnackBar = function () {
+  const closeSnackBar = useCallback(function closeSnackBar() {
     setSnackBarVisible(false);
     setSnackBarStatus(null);
     setSnackBarMsg("");
-  };
+  }, []);
 
   const handleSnackBarStatus = function (status: SnackBarStatus) {
     setSnackBarStatus(status);

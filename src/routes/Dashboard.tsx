@@ -1,6 +1,7 @@
 import RouteTitle from "../ui/RouteTitle";
 import Stat from "../ui/Stat";
 import { useData } from "../contexts/DataContext";
+import ChartPembelian from "../components/pembelian/ChartPembelian";
 
 function Dashboard() {
   const { totalPembelian, totalProduk, totalUser } = useData();
@@ -14,6 +15,8 @@ function Dashboard() {
         <Stat title="Jumlah pembelian" value={totalPembelian} color="blue" />
         <Stat title="Jumlah user" value={totalUser} color="indigo" />
       </div>
+
+      <ChartPembelian />
     </>
   );
 }
