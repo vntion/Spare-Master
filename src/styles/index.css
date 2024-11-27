@@ -37,7 +37,7 @@ html.dark .sidenav a.active {
 
 /* Snack Bar */
 .snack-bar {
-  position: absolute;
+  position: fixed;
   left: 50%;
   transform: translateX(-50%) translateY(-5rem);
   animation: snackbar 5s ease-in;

@@ -13,9 +13,11 @@ function SnackBar() {
 
   if (status === "success")
     return (
-      <div className="snack-bar absolute z-50 flex items-center gap-1 rounded-md bg-green-300/60 p-2 text-gray-300">
-        <CheckCircleIcon className="size-5 text-green-600" />
-        <span className="text-xs font-semibold text-green-600">{msg}</span>
+      <div className="snack-bar absolute z-50 flex items-center gap-1 rounded-md bg-green-300/60 p-2 text-gray-300 dark:bg-green-600">
+        <CheckCircleIcon className="size-5 text-green-600 dark:text-green-800" />
+        <span className="text-xs font-semibold text-green-600 dark:text-green-800">
+          {msg}
+        </span>
       </div>
     );
 
