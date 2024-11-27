@@ -96,3 +96,4 @@ To run this project, you will need to add the following environment variables to
 - **Dashboard**: `/admin/dashboard`
 - **Pembelian**: `/admin/pembelian`
 - **Produk**: `/admin/produk`
+- **User**: `/admin/user`
