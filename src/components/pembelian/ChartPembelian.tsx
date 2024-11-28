@@ -51,7 +51,7 @@ function PembelianChart() {
   ];
 
   return (
-    <div className="mt-8 rounded-md bg-white p-5 dark:bg-[#161e2a]">
+    <div className="mt-6 rounded-md bg-white p-5 dark:bg-[#161e2a]">
       <h4 className="mb-5 text-xl font-bold dark:text-white">Pembelian</h4>
 
       <ResponsiveContainer width="100%" height={400}>

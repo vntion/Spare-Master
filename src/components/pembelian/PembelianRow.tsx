@@ -9,7 +9,7 @@ interface Props {
 function PembelianRow({ pembelian }: Props) {
   const formattedDate = format(pembelian.tanggalBeli, "dd MMMM yyyy");
   const formattedTotalHarga = formatRupiah(Number(pembelian.totalHarga));
-  const formattedAlamat = formatString(pembelian.alamat, 30);
+  const formattedAlamat = formatString(pembelian.alamat, 25);
   const formattedProduk = formatString(pembelian.produk, 20);
   const formattedPembeli = formatString(pembelian.pembeli, 20);
   const formattedEmail = formatString(pembelian.email, 25);

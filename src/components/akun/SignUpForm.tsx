@@ -14,7 +14,7 @@ function SignUpForm() {
   const [isShowPass, setIsShowPass] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
 
-  const { onName, onRole } = useAuth();
+  const { onName, onRole, onAuth } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async function (e: React.ChangeEvent<HTMLFormElement>) {
@@ -31,6 +31,8 @@ function SignUpForm() {
       const data: Akun = res.data;
       onName(data.nama);
       onRole(data.role);
+      onAuth(false);
+
       await createSession(data);
       navigate("/");
     } catch (err) {
