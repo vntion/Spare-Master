@@ -1,63 +1,79 @@
-import { format, isEqual } from "date-fns";
 import {
-  LineChart,
-  Line,
+  Area,
+  AreaChart,
+  CartesianGrid,
+  ResponsiveContainer,
+  Tooltip,
   XAxis,
   YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
 } from "recharts";
+import { useData } from "../../contexts/DataContext";
+import { calcTotalPembelian } from "../../utils/helpers";
+import { DataPoint } from "../../utils/interfaces";
+import CustomTooltip from "./CustomTooltip";
 
-// Data dummy untuk chart, sesuaikan dengan data dari backend
-const data = [
-  { createdAt: "Jan-Feb", totalHarga: 500000 },
-  { createdAt: "Mar-Apr", totalHarga: 0 },
-  { createdAt: "Mei-Juni", totalHarga: 0 },
-  { createdAt: "Juli-Agst", totalHarga: 0 },
-  { createdAt: "Sep-Okt", totalHarga: 0 },
-  { createdAt: "Nov-Des", totalHarga: 0 },
-];
+const formatYAxis = (value: number): string => {
+  if (value >= 1000) {
+    return `${(value / 1000).toString()}k`;
+  }
+  return value.toString();
+};
 
-const PembelianChart = () => {
-  const compareDate = function () {
-    console.log(format("2024-11-25 00:10:07", "MMM"));
-  };
+function PembelianChart() {
+  const { pembelian } = useData();
 
-  compareDate();
+  const data: DataPoint[] = [
+    {
+      bulan: "Jan-Feb",
+      totalPembelian: calcTotalPembelian(pembelian, "Jan", "Feb"),
+    },
+    {
+      bulan: "Mar-Apr",
+      totalPembelian: calcTotalPembelian(pembelian, "Mar", "Apr"),
+    },
+    {
+      bulan: "Mei-Juni",
+      totalPembelian: calcTotalPembelian(pembelian, "Mei", "Juni"),
+    },
+    {
+      bulan: "Juli-Agst",
+      totalPembelian: calcTotalPembelian(pembelian, "Juli", "Agst"),
+    },
+    {
+      bulan: "Sep-Okt",
+      totalPembelian: calcTotalPembelian(pembelian, "Sep", "Okt"),
+    },
+    {
+      bulan: "Nov-Des",
+      totalPembelian: calcTotalPembelian(pembelian, "Nov", "Des"),
+    },
+  ];
 
   return (
     <div className="mt-8 rounded-md bg-white p-5 dark:bg-[#161e2a]">
       <h4 className="mb-5 text-xl font-bold dark:text-white">Pembelian</h4>
 
       <ResponsiveContainer width="100%" height={400}>
-        <LineChart
+        <AreaChart
           data={data}
           margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
         >
+          <XAxis dataKey="bulan" />
+          <YAxis tickFormatter={formatYAxis} />
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis
-            dataKey="createdAt"
-            label={{
-              value: "Tanggal Pembelian",
-              position: "insideBottom",
-              offset: -5,
-            }}
-          />
-          <YAxis
-            label={{ value: "Harga (Rp)", angle: -90, position: "insideLeft" }}
-          />
-          <Tooltip />
-          <Line
+          <Tooltip content={CustomTooltip} />
+          <Area
             type="monotone"
-            dataKey="totalHarga"
-            stroke="#8884d8"
+            dataKey="totalPembelian"
+            stroke="#1782cf"
+            fill="#1782cf"
+            fillOpacity={0.3}
             strokeWidth={2}
           />
-        </LineChart>
+        </AreaChart>
       </ResponsiveContainer>
     </div>
   );
-};
+}
 
 export default PembelianChart;

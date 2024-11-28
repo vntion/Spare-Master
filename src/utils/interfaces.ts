@@ -81,6 +81,17 @@ export interface SelectedProduk {
   action: "Tambah" | "Edit";
 }
 
+export interface DataPoint {
+  bulan:
+    | "Jan-Feb"
+    | "Mar-Apr"
+    | "Mei-Juni"
+    | "Juli-Agst"
+    | "Sep-Okt"
+    | "Nov-Des";
+  totalPembelian: number;
+}
+
 export interface SessionPayload {
   akun: Akun;
   expiresAt: Date;
