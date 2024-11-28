@@ -1,17 +1,13 @@
 import { StatProps } from "../utils/interfaces";
 
-function Stat({ title, value, color }: StatProps) {
-  const bgColor = {
-    orange: "bg-orange-600",
-    blue: "bg-blue-500",
-    indigo: "bg-indigo-500",
-  };
-
+function Stat({ title, value, icon }: StatProps) {
   return (
-    <div className={"grid grid-cols-1 p-4 text-white " + `${bgColor[color]}`}>
-      <h4 className="text-xl font-medium">{title}</h4>
-      <div className="justify-self-center text-center text-8xl font-bold">
-        {value}
+    <div className={"flex items-center gap-3 bg-white p-4 dark:bg-[#161e2a]"}>
+      <div className="basis-1/5 overflow-hidden rounded-full">{icon}</div>
+
+      <div>
+        <h4 className="mb-1 text-sm text-gray-500 dark:text-[#999]">{title}</h4>
+        <div className="text-2xl font-semibold dark:text-white">{value}</div>
       </div>
     </div>
   );

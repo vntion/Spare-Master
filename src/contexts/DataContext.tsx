@@ -5,7 +5,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { CustomError } from "../utils/helpers";
+import { CustomError, formatRupiah } from "../utils/helpers";
 import { DataContextType, Pembelian, Produk, Akun } from "../utils/interfaces";
 import { getAllProduk } from "../services/apiProduk";
 import { getAllPembelian } from "../services/apiPembelian";
@@ -37,7 +37,9 @@ function DataProvider({ children }: Props) {
   };
 
   const totalProduk: number = produk.length;
-  const totalPembelian: number = pembelian.length;
+  const totalPembelian: string = formatRupiah(
+    pembelian.reduce((acc, pembelian) => acc + Number(pembelian.totalHarga), 0),
+  );
   const totalUser: number = user.length;
 
   useEffect(() => {

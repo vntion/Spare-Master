@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import { OpenForm, Role, SnackBarStatus } from "./types";
 
 export interface CreatePembelian {
@@ -53,8 +54,8 @@ export interface SnackBarProps {
 
 export interface StatProps {
   title: string;
-  value: number;
-  color: "orange" | "blue" | "indigo";
+  value: number | string;
+  icon: ReactNode;
 }
 
 export interface LogoutBtnProps {
@@ -112,7 +113,7 @@ export interface DataContextType {
   onDeleteProduk: (id: string) => void;
   onEditProduk: (edittedProduk: Produk) => void;
   totalProduk: number;
-  totalPembelian: number;
+  totalPembelian: string;
   totalUser: number;
 }
 

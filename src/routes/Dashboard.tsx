@@ -1,7 +1,12 @@
+import {
+  CubeIcon,
+  ShoppingBagIcon,
+  UserGroupIcon,
+} from "@heroicons/react/24/outline";
+import ChartPembelian from "../components/pembelian/ChartPembelian";
+import { useData } from "../contexts/DataContext";
 import RouteTitle from "../ui/RouteTitle";
 import Stat from "../ui/Stat";
-import { useData } from "../contexts/DataContext";
-import ChartPembelian from "../components/pembelian/ChartPembelian";
 
 function Dashboard() {
   const { totalPembelian, totalProduk, totalUser } = useData();
@@ -10,10 +15,22 @@ function Dashboard() {
     <>
       <RouteTitle>Dashboard</RouteTitle>
 
-      <div className="grid grid-cols-3 grid-rows-[13rem] gap-6 *:rounded-md">
-        <Stat title="Jumlah produk" value={totalProduk} color="orange" />
-        <Stat title="Jumlah pembelian" value={totalPembelian} color="blue" />
-        <Stat title="Jumlah user" value={totalUser} color="indigo" />
+      <div className="grid grid-cols-3 gap-6 *:rounded-md">
+        <Stat
+          title="Jumlah produk"
+          value={totalProduk}
+          icon={<CubeIcon className="bg-indigo-500 p-3 text-white" />}
+        />
+        <Stat
+          title="Total pembelian"
+          value={totalPembelian}
+          icon={<ShoppingBagIcon className="bg-blue-500 p-3 text-white" />}
+        />
+        <Stat
+          title="Jumlah user"
+          value={totalUser}
+          icon={<UserGroupIcon className="bg-orange-500 p-3 text-white" />}
+        />
       </div>
 
       <ChartPembelian />

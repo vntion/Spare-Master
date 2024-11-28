@@ -13,10 +13,11 @@ import { DataPoint } from "../../utils/interfaces";
 import CustomTooltip from "./CustomTooltip";
 
 const formatYAxis = (value: number): string => {
-  if (value >= 1000) {
-    return `${(value / 1000).toString()}k`;
+  if (value >= 1_000_000) {
+    return `${(value / 1_000_000).toString()}jt`;
   }
-  return value.toString();
+
+  return `${(value / 100_000).toString()}k`;
 };
 
 function PembelianChart() {
