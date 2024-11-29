@@ -23,7 +23,7 @@ function ProdukList() {
 
   return (
     <section className="px-[2vw] py-16" id="main">
-      <div className="mx-auto grid max-w-[80rem] grid-cols-4 gap-6">
+      <div className="mx-auto grid max-w-[80rem] grid-cols-6 gap-4">
         {error && <p>error</p>}
         {!error && (
           <>
