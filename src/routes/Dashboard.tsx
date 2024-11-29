@@ -1,6 +1,6 @@
 import {
+  BanknotesIcon,
   CubeIcon,
-  ShoppingBagIcon,
   UserGroupIcon,
 } from "@heroicons/react/24/outline";
 import ChartPembelian from "../components/pembelian/ChartPembelian";
@@ -24,7 +24,7 @@ function Dashboard() {
         <Stat
           title="Total pembelian"
           value={totalPembelian}
-          icon={<ShoppingBagIcon className="bg-blue-500 p-3 text-white" />}
+          icon={<BanknotesIcon className="bg-blue-500 p-3 text-white" />}
         />
         <Stat
           title="Jumlah user"

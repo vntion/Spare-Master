@@ -1,21 +1,21 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { AuthProvider } from "./contexts/AuthContext";
+import { DataProvider } from "./contexts/DataContext";
+import { SnackBarProvider } from "./contexts/SnackBarContext";
+import { ToggleFormProvider } from "./contexts/ToggleFormContext";
+import AdminLayout from "./pages/AdminLayout";
 import Home from "./pages/Home";
+import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 import ProdukDetail from "./pages/ProdukDetail";
-import ThankYou from "./pages/ThankYou";
 import SearchProduk from "./pages/SearchProduk";
-import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
-import AdminLayout from "./pages/AdminLayout";
+import ThankYou from "./pages/ThankYou";
 import Dashboard from "./routes/Dashboard";
 import Pembelian from "./routes/Pembelian";
 import Produk from "./routes/Produk";
-import { DataProvider } from "./contexts/DataContext";
-import { AuthProvider } from "./contexts/AuthContext";
 import ProtectedRoute from "./routes/ProtectedRoute";
-import { ToggleFormProvider } from "./contexts/ToggleFormContext";
 import User from "./routes/User";
-import { SnackBarProvider } from "./contexts/SnackBarContext";
 
 function App() {
   return (
