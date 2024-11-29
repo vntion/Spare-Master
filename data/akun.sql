@@ -16,5 +16,5 @@ CREATE TABLE IF NOT EXISTS `akun` (
 INSERT INTO `akun` (`nama`, `password`, `email`, `role`) VALUES 
 ("admin", "admin1234", "admin@gmail.com", 'admin'),
 ("user1", "user1", "user1@gmail.com", 'user'),
-("user2", "user2", "user2@gmail.com", "user");
-("user3", "user3", "user3@gmail.com", 'user'),
+("user2", "user2", "user2@gmail.com", "user"),
+("user3", "user3", "user3@gmail.com", 'user');
