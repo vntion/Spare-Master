@@ -43,26 +43,26 @@ switch ($request_method) {
 function getPembelian($CRUD, $akun_id)
 {
     $query = "
-        SELECT 
-            pembelian.isPaid, 
-            pembelian.alamat, 
-            pembelian.totalHarga, 
-            produk.nama AS produk, 
-            produk.gambar AS gambarProduk,
-            akun.nama AS pembeli, 
-            akun.email AS email, 
-            pembelian.createdAt AS tanggalBeli,
-            (pembelian.totalHarga / produk.harga) AS jumlahBeli
-        FROM 
-            pembelian
-        JOIN 
-            akun ON pembelian.akunId = akun.id
-        JOIN 
-            produk ON pembelian.produkId = produk.id
-    ";
+    SELECT 
+        pembelian.isPaid, 
+        pembelian.alamat, 
+        pembelian.totalHarga, 
+        pembelian.jumlahProduk,
+        produk.nama AS produk, 
+        produk.gambar AS gambarProduk,
+        akun.nama AS pembeli, 
+        akun.email AS email, 
+        pembelian.createdAt AS tanggalBeli
+    FROM 
+        pembelian
+    JOIN 
+        akun ON pembelian.akunId = akun.id
+    JOIN 
+        produk ON pembelian.produkId = produk.id
+";
 
-    if (!is_null($akun_id)) {
-        $query .= " WHERE pembelian.akunId = {$akun_id}";
+    if ($akun_id != null) {
+        $query .= " WHERE pembelian.akunId = '{$akun_id}'";
     }
 
     $res = $CRUD->read($query);
@@ -93,6 +93,7 @@ function createPembelian($CRUD)
     $alamat = $data["alamat"] ?? null;
     $produkId = $data["produkId"] ?? null;
     $akunId = $data["akunId"] ?? null;
+    $jumlahProduk = $data["jumlahProduk"] ?? 1;
     if (
         is_null($isPaid) ||
         !$totalHarga ||
@@ -106,7 +107,7 @@ function createPembelian($CRUD)
         ]);
         return;
     }
-    $query = "INSERT INTO pembelian (isPaid, totalHarga, alamat,produkId,akunId) VALUES ('{$isPaid}', '{$totalHarga}', '{$alamat}','{$produkId}','{$akunId}')";
+    $query = "INSERT INTO pembelian (isPaid, totalHarga, alamat,jumlahProduk,produkId,akunId) VALUES ('{$isPaid}', '{$totalHarga}', '{$alamat}', '{$jumlahProduk}','{$produkId}','{$akunId}')";
     try {
         $res = $CRUD->create($query);
     } catch (Exception $e) {

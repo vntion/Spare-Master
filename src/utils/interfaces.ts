@@ -42,6 +42,8 @@ export interface Pembelian {
   isPaid: string;
   alamat: string;
   totalHarga: string;
+  jumlahProduk: string;
+  gambarProduk: string;
   produk: string;
   pembeli: string;
   email: string;
