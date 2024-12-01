@@ -9,8 +9,8 @@ interface Props {
 }
 
 function ProdukRow({ produk }: Props) {
-  const formattedDeskripsi = formatString(produk!.deskripsi, 40);
-  const formattedNama = formatString(produk!.nama, 20);
+  const formattedDeskripsi = formatString(produk!.deskripsi ?? "", 40);
+  const formattedNama = formatString(produk!.nama ?? "", 20);
   const { isOpenAction, currOpenAct, onOpenAction, onCurrOpenAct } =
     useToggleForm();
 

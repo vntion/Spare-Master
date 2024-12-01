@@ -1,5 +1,5 @@
 import { CustomError } from "../utils/helpers";
-import { SignUp } from "../utils/interfaces";
+import { SignUp, UpdateAkunProps } from "../utils/interfaces";
 
 export async function getAkun(email: string, password: string) {
   const res = await fetch(
@@ -30,4 +30,34 @@ export async function createAkun(newAkun: SignUp) {
   const data = await res.json();
   if (!data.status) throw new CustomError(data.message);
   return data;
+}
+
+export async function updateAkun({
+  id,
+  nama,
+  profile,
+  password,
+}: UpdateAkunProps) {
+  const updatedData = {
+    nama,
+    password,
+    profile,
+  };
+
+  const res = await fetch(
+    `http://localhost/SpareMaster/api/akun?akun_id=${id}`,
+    {
+      method: "PATCH",
+      body: JSON.stringify(updatedData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    },
+  );
+
+  const data = await res.json();
+
+  if (!data.status) throw new CustomError(data.message);
+
+  return data.message;
 }

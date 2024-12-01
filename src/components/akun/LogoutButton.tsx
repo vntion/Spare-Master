@@ -17,6 +17,7 @@ function LogoutButton({ color }: LogoutBtnProps) {
   return (
     <button onClick={handleLogout}>
       <ArrowRightStartOnRectangleIcon
+        onClick={handleLogout}
         className={`size-5 ${color === "blue" ? "text-primary" : "text-black"}`}
       />
     </button>

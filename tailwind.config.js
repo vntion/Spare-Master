@@ -8,7 +8,7 @@ export default {
         primaryBg: "#F5F7FA",
       },
       fontFamily: {
-        lato: "Lato, sans-serif",
+        lato: "Poppins, sans-serif",
       },
     },
   },

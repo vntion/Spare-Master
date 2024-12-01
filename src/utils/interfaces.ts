@@ -31,6 +31,13 @@ export interface Produk {
   gambar?: string;
 }
 
+export interface UpdateAkunProps {
+  id: string;
+  nama?: string;
+  password?: string;
+  profile?: string;
+}
+
 export interface Pembelian {
   isPaid: string;
   alamat: string;
@@ -68,6 +75,7 @@ export interface Akun {
   email: string;
   password: string;
   role: Role;
+  profile: string;
 }
 
 export interface SignUp {
@@ -75,6 +83,7 @@ export interface SignUp {
   password: string;
   email: string;
   role: Role;
+  profile: string;
 }
 
 export interface SelectedProduk {
@@ -94,12 +103,20 @@ export interface DataPoint {
 }
 
 export interface SessionPayload {
-  akun: Akun;
+  akun: SessionAkun;
   expiresAt: Date;
 }
 
+export interface SessionAkun {
+  id: string;
+  nama: string;
+  email: string;
+  role: Role;
+  profile: string;
+}
+
 export interface Session {
-  akun: Akun;
+  akun: SessionAkun;
   expiresAt: Date;
   exp: number;
   iat: number;
@@ -122,6 +139,8 @@ export interface AuthContextType {
   role: Role;
   name: string | null;
   isLoading?: boolean;
+  profile: string;
+  onProfile: (profile: string) => void;
   onAuth: (isAuth: boolean) => void;
   onRole: (role: Role) => void;
   onName: (name: string) => void;

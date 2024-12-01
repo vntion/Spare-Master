@@ -1,6 +1,6 @@
 import { jwtVerify, SignJWT } from "jose";
 import { Cookies } from "react-cookie";
-import { Akun, Session, SessionPayload } from "./interfaces";
+import { Session, SessionAkun, SessionPayload } from "./interfaces";
 
 const secretKey: string = import.meta.env.VITE_SESSION_SECRET;
 const encodedKey = new TextEncoder().encode(secretKey);
@@ -28,7 +28,7 @@ export async function decrypt(
       typeof payload.iat === "number"
     ) {
       return {
-        akun: payload.akun as Akun,
+        akun: payload.akun as SessionAkun,
         expiresAt: new Date(payload.expiresAt),
         exp: payload.exp,
         iat: payload.iat,
@@ -41,7 +41,7 @@ export async function decrypt(
   }
 }
 
-export async function createSession(akun: Akun) {
+export async function createSession(akun: SessionAkun) {
   const expiresAt = new Date(Date.now() + 1 * 24 * 60 * 60 * 1000);
   const session = await encrypt({ akun, expiresAt });
   const cookies = new Cookies();
@@ -73,6 +73,5 @@ export async function updateSession() {
 }
 
 export async function deleteSession() {
-  const cookies = new Cookies();
-  cookies.remove("auth");
+  await new Cookies().remove("auth");
 }

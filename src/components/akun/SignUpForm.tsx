@@ -1,6 +1,6 @@
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
-import { Akun, SignUp } from "../../utils/interfaces";
+import { Akun, SessionAkun, SignUp } from "../../utils/interfaces";
 import { createAkun } from "../../services/apiAkun";
 import { CustomError } from "../../utils/helpers";
 import { useAuth } from "../../contexts/AuthContext";
@@ -14,26 +14,37 @@ function SignUpForm() {
   const [isShowPass, setIsShowPass] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
 
-  const { onName, onRole, onAuth } = useAuth();
+  const { onName, onRole, onAuth, onProfile } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async function (e: React.ChangeEvent<HTMLFormElement>) {
     e.preventDefault();
     try {
+      const randomNum = Math.trunc(Math.random() * 1000) + 1;
       const signUp: SignUp = {
         nama: nama.trim(),
         email: email.trim(),
         password: password.trim(),
         role: "user",
+        profile: `https://i.pravatar.cc/1000?u=${randomNum}`,
       };
 
       const res = await createAkun(signUp);
       const data: Akun = res.data;
       onName(data.nama);
       onRole(data.role);
+      onProfile(`https://i.pravatar.cc/1000?u=${randomNum}`);
       onAuth(false);
 
-      await createSession(data);
+      const sessionData: SessionAkun = {
+        id: data.id,
+        nama: data.nama,
+        email: data.email,
+        role: data.role,
+        profile: data.profile,
+      };
+
+      await createSession(sessionData);
       navigate("/");
     } catch (err) {
       if (err instanceof CustomError) {

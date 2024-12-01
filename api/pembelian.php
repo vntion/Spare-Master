@@ -22,7 +22,12 @@ $CRUD = new CRUD();
 $request_method = $_SERVER["REQUEST_METHOD"];
 switch ($request_method) {
     case "GET":
-        getPembelian($CRUD);
+        if(!empty($_GET["akun_id"])) {
+            $akun_id = intval($_GET["akun_id"]);
+            getPembelian($CRUD, $akun_id);
+        } else {
+            getPembelian($CRUD, null);
+        }
         break;
 
     case "POST":
@@ -35,7 +40,7 @@ switch ($request_method) {
 }
 
 // Get pembelian
-function getPembelian($CRUD)
+function getPembelian($CRUD, $akun_id)
 {
     $query = "
         SELECT 
@@ -43,9 +48,11 @@ function getPembelian($CRUD)
             pembelian.alamat, 
             pembelian.totalHarga, 
             produk.nama AS produk, 
+            produk.gambar AS gambarProduk,
             akun.nama AS pembeli, 
             akun.email AS email, 
-            pembelian.createdAt As tanggalBeli
+            pembelian.createdAt AS tanggalBeli,
+            (pembelian.totalHarga / produk.harga) AS jumlahBeli
         FROM 
             pembelian
         JOIN 
@@ -53,6 +60,10 @@ function getPembelian($CRUD)
         JOIN 
             produk ON pembelian.produkId = produk.id
     ";
+
+    if (!is_null($akun_id)) {
+        $query .= " WHERE pembelian.akunId = {$akun_id}";
+    }
 
     $res = $CRUD->read($query);
     $result = "";
@@ -70,6 +81,7 @@ function getPembelian($CRUD)
 
     echo json_encode($result);
 }
+
 
 
 // Create pembelian

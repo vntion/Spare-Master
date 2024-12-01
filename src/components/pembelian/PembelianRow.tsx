@@ -12,7 +12,7 @@ function PembelianRow({ pembelian }: Props) {
   const formattedAlamat = formatString(pembelian.alamat, 25);
   const formattedProduk = formatString(pembelian.produk, 20);
   const formattedPembeli = formatString(pembelian.pembeli, 20);
-  const formattedEmail = formatString(pembelian.email, 25);
+  const formattedEmail = formatString(pembelian.email, 15);
 
   return (
     <div className="grid grid-cols-[1.5fr_1.5fr_2fr_1.5fr_1fr_1.2fr] items-center p-3 text-sm dark:text-white">
@@ -25,7 +25,7 @@ function PembelianRow({ pembelian }: Props) {
       </div>
       <div className="overflow-x-auto">{formattedAlamat}</div>
       <div>{formattedDate}</div>
-      <div className="max-w-min rounded bg-green-500 px-2 py-1 font-semibold text-white">
+      <div className="max-w-min rounded bg-green-500 px-2 py-1 font-medium text-white">
         terbayar
       </div>
       <div>{formattedTotalHarga}</div>

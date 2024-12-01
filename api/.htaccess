@@ -2,11 +2,13 @@ RewriteEngine On
 
 # Produk
 RewriteRule ^produk/?$ produk.php [NC,L]
-RewriteRule ^produk/([0-9]+)/?$ produk.php?produk_id=$1&search=$1 [NC,L]
+RewriteRule ^produk/?$ produk.php?produk_id=$1&search=$1 [NC,L]
 
 # Akun
 RewriteRule ^akun/?$ akun.php [NC,L]
-RewriteRule ^akun/([0-9]+)/?$ akun.php?email=$1&password=$1 [NC,L]
+RewriteRule ^akun/?$ akun.php?email=$1&password=$1&akun_id=$1 [NC,L]
 
 # Pembelian
 RewriteRule ^pembelian/?$ pembelian.php [NC,L]
+RewriteRule ^pembelian/?$ akun.php?akun_id=$1 [NC,L]
+

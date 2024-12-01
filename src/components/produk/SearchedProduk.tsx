@@ -34,7 +34,7 @@ function SearchedProduk() {
     <div className="mx-auto max-w-[80rem]">
       <p className="mb-4 text-2xl">Hasil pencarian dari: {query}</p>
 
-      <div className="grid grid-cols-4 gap-6">
+      <div className="grid grid-cols-6 gap-4">
         {isLoading && <Spinner />}
         {error && (
           <p className="col-span-full text-center font-bold">{error}</p>

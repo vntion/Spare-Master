@@ -5,7 +5,7 @@ function Hero() {
 
   return (
     <section className="relative flex flex-col items-center gap-7 border-b border-b-[#999]/60 py-[11.5rem] text-center text-white">
-      <h3 className="max-w-[41rem] -translate-y-1 text-4xl font-bold leading-[45px] tracking-wider">
+      <h3 className="max-w-[48rem] -translate-y-1 text-4xl font-semibold leading-[45px] tracking-wider">
         Temukan Suku Cadang Terbaik untuk Kendaraan Anda Tetap Prima
       </h3>
 

@@ -4,11 +4,11 @@ if (isset($_SERVER["HTTP_ORIGIN"])) {
     //header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
     header("Access-Control-Allow-Origin: *");
     header("Access-Control-Allow-Credentials: true");
-    header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+    header("Access-Control-Allow-Methods: GET, POST, PUT, PATCH,DELETE, OPTIONS");
 }
 if ($_SERVER["REQUEST_METHOD"] == "OPTIONS") {
     if (isset($_SERVER["HTTP_ACCESS_CONTROL_REQUEST_METHOD"])) {
-        header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+        header("Access-Control-Allow-Methods: GET, POST, PUT, PATCH,DELETE, OPTIONS");
     }
     if (isset($_SERVER["HTTP_ACCESS_CONTROL_REQUEST_HEADERS"])) {
         header(
@@ -36,15 +36,62 @@ switch ($request_method) {
         createAkun($CRUD);
         break;
 
+    case "PATCH":
+        $akun_id = intval($_GET["akun_id"]);
+        updateAkun($akun_id, $CRUD);
+        break;
+
     default:
         header("HTTP/1.0 405 Method Not Allowed");
         break;
 }
 
+// Update akun
+function updateAkun($akun_id, $CRUD) {
+    // Ambil data dari input (misalnya menggunakan $_POST)
+    $data = json_decode(file_get_contents("php://input"), true);
+    $nama = $data["nama"] ?? null;
+    $password = $data["password"] ?? null;
+    $profil = $data["profile"] ?? null;
+
+    // Cek apakah ada data yang perlu diperbarui
+    $updateQuery = "UPDATE akun SET ";
+    $updateFields = [];
+
+    if ($nama) {
+        $updateFields[] = "nama = '$nama'";
+    }
+    if ($profil) {
+        $updateFields[] = "profile = '$profil'";
+    }
+    if ($password) {
+        $updateFields[] = "password = '$password'";
+    }
+
+    if (count($updateFields) > 0) {
+        $updateQuery .= implode(", ", $updateFields);
+        $updateQuery .= " WHERE id = $akun_id";
+
+        $updateResult = $CRUD->update($updateQuery);
+
+        if ($updateResult) {
+            $response = ["status" => true, "message" => "Akun berhasil diperbarui."];
+        } else {
+            $response = ["status" => false, "message" => "Gagal memperbarui akun."];
+        }
+    } else {
+        $response = ["status" => false, "message" => "Tidak ada data yang diubah."];
+    }
+
+    echo json_encode($response);
+}
+
+
+
 // Get akun
 function getAkun($password, $email, $CRUD)
 {
-    $query = "SELECT id, nama, email, password, role FROM akun";
+    $query = "SELECT id, nama, email, password, role, profile FROM akun";
 
     if ($password && $email) {
         $query .= " WHERE password='{$password}' AND email='{$email}'";
@@ -74,8 +121,9 @@ function createAkun($CRUD)
     $password = $data["password"] ?? null;
     $email = $data["email"] ?? null;
     $role = $data["role"] ?? null;
+    $profile = $data["profile"] ?? null;
 
-    if (!$nama || !$email || !$role || !$password) {
+    if (!$nama || !$email || !$role || !$password || !$profile) {
         echo json_encode([
             "status" => false,
             "message" => "Invalid input data",
@@ -83,7 +131,7 @@ function createAkun($CRUD)
         return;
     }
 
-    $queryInsert = "INSERT INTO akun (nama, password, email, role) VALUES ('{$nama}', '{$password}', '{$email}', '{$role}')";
+    $queryInsert = "INSERT INTO akun (nama, password, email, role, profile) VALUES ('{$nama}', '{$password}', '{$email}', '{$role}', '{$profile}')";
     
     try {
         $res = $CRUD->create($queryInsert);
@@ -101,6 +149,7 @@ function createAkun($CRUD)
                         "nama" => $nama,
                         "email" => $email,
                         "role" => $role,
+                        "profile" => $profile,
                     ]
                 ]);
             } else {

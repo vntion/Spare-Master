@@ -21,6 +21,12 @@ function AuthProvider({ children }: Props) {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [role, setRole] = useState<Role>(null);
   const [name, setName] = useState<string | null>(null);
+  const [profile, setProfile] = useState<string>("");
+
+  const handleProfile = function (profile: string) {
+    setProfile(profile);
+  };
+
   const handleIsAuth = function (isAuth: boolean) {
     setIsAuthenticated(isAuth);
   };
@@ -37,6 +43,7 @@ function AuthProvider({ children }: Props) {
     setIsAuthenticated(false);
     setRole(null);
     setName(null);
+    setProfile("");
   };
 
   useEffect(() => {
@@ -49,6 +56,7 @@ function AuthProvider({ children }: Props) {
       }
       if (session.akun.role === "admin") setIsAuthenticated(true);
 
+      console.log(session);
       setName(session.akun.nama);
       setRole(session.akun.role);
     };
@@ -62,6 +70,8 @@ function AuthProvider({ children }: Props) {
         isAuthenticated,
         role,
         name,
+        profile,
+        onProfile: handleProfile,
         onAuth: handleIsAuth,
         onRole: handleRole,
         onName: handleName,

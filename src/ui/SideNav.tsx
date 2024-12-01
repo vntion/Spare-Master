@@ -21,7 +21,7 @@ function SideNav() {
           <li>
             <NavLink
               to="dashboard"
-              className="flex items-center gap-2 rounded-md px-2 py-3 font-medium"
+              className="flex items-center gap-2 rounded-md px-2 py-3"
             >
               <HomeIcon
                 className={`size-5 ${currLocation === "dashboard" ? "text-primary" : ""}`}
@@ -32,7 +32,7 @@ function SideNav() {
           <li>
             <NavLink
               to="pembelian"
-              className="flex items-center gap-2 rounded-md px-2 py-3 font-medium"
+              className="flex items-center gap-2 rounded-md px-2 py-3"
             >
               <CreditCardIcon
                 className={`size-5 ${currLocation === "pembelian" ? "text-primary" : ""}`}
@@ -43,7 +43,7 @@ function SideNav() {
           <li>
             <NavLink
               to="produk"
-              className="flex items-center gap-2 rounded-md px-2 py-3 font-medium"
+              className="flex items-center gap-2 rounded-md px-2 py-3"
             >
               <ArchiveBoxIcon
                 className={`size-5 ${currLocation === "produk" ? "text-primary" : ""}`}
@@ -54,7 +54,7 @@ function SideNav() {
           <li>
             <NavLink
               to="user"
-              className="flex items-center gap-2 rounded-md px-2 py-3 font-medium"
+              className="flex items-center gap-2 rounded-md px-2 py-3"
             >
               <UserGroupIcon
                 className={`size-5 ${currLocation === "user" ? "text-primary" : ""}`}

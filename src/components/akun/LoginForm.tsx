@@ -8,7 +8,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { CustomError } from "../../utils/helpers";
 import { getAkun } from "../../services/apiAkun";
-import { Akun } from "../../utils/interfaces";
+import { Akun, SessionAkun } from "../../utils/interfaces";
 import { createSession } from "../../utils/session";
 import { useAuth } from "../../contexts/AuthContext";
 
@@ -18,7 +18,7 @@ function LoginForm() {
   const [isShowPass, setIsShowPass] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const navigate = useNavigate();
-  const { onAuth, onName, onRole } = useAuth();
+  const { onAuth, onName, onRole, onProfile } = useAuth();
 
   const handleSubmit = async function (e: React.ChangeEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -27,9 +27,17 @@ function LoginForm() {
 
     try {
       const data: Akun = await getAkun(email, password);
-      await createSession(data);
+      const sessionData: SessionAkun = {
+        id: data.id,
+        nama: data.nama,
+        email: data.email,
+        role: data.role,
+        profile: data.profile,
+      };
+      await createSession(sessionData);
       onName(data.nama);
       onRole(data.role);
+      onProfile(data.profile);
       if (data.role === "admin") {
         onAuth(true);
         navigate("/admin");

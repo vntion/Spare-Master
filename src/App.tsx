@@ -16,6 +16,7 @@ import Pembelian from "./routes/Pembelian";
 import Produk from "./routes/Produk";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import User from "./routes/User";
+import Account from "./routes/Account";
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
             <Route index element={<Navigate to="dashboard" />} />
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="pembelian" element={<Pembelian />} />
+            <Route path="account" element={<Account />} />
             <Route path="produk" element={<Produk />} />
             <Route path="user" element={<User />} />
           </Route>
