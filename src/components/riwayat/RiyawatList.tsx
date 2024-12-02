@@ -10,6 +10,10 @@ function RiyawatList() {
   const [pembelian, setPembelian] = useState<Pembelian[]>([]);
   const navigate = useNavigate();
 
+  const sortedPembelian = pembelian.sort(
+    (a, b) => new Date(b.tanggalBeli) - new Date(a.tanggalBeli),
+  );
+
   useEffect(() => {
     const fetchData = async function () {
       try {
@@ -37,13 +41,13 @@ function RiyawatList() {
       <h3 className="mb-6 text-2xl font-bold text-gray-800">
         Riwayat Pembelian
       </h3>
-      {pembelian.length === 0 ? (
+      {sortedPembelian.length === 0 ? (
         <div className="rounded-lg bg-white py-8 text-center shadow-sm">
           <p className="text-gray-500">Belum ada pembelian</p>
         </div>
       ) : (
         <div className="mb-6 max-h-[60rem] space-y-4 overflow-auto">
-          {pembelian.map((item) => (
+          {sortedPembelian.map((item) => (
             <RiyawatCard key={item.id} pembelian={item} />
           ))}
         </div>
