@@ -51,7 +51,7 @@ function ProdukAction({ produk }: ProdukActionProps) {
         cancel="Batal"
         continueText="Hapus"
         title="Hapus produk"
-        description="Apakah Anda yakin ingin menghapus produk ini secara permanen? Tindakan ini dapat dibatalkan."
+        description="Apakah Anda yakin ingin menghapus produk ini secara permanen? Tindakan ini tidak dapat dibatalkan."
       />
     </div>
   );
