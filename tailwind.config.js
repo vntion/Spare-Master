@@ -10,8 +10,13 @@ export default {
       fontFamily: {
         lato: "Poppins, sans-serif",
       },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
+      },
     },
   },
-  plugins: [],
-  darkMode: "selector",
+  plugins: [require("tailwindcss-animate")],
+  darkMode: ["selector"],
 };

@@ -1,18 +1,21 @@
 import { useState } from "react";
 import { Cookies } from "react-cookie";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { createCart } from "../../services/apiCart";
 import { decrypt } from "../../utils/session";
+import { useToast } from "@/hooks/use-toast";
+import { CheckCircleIcon } from "@heroicons/react/24/outline";
+import { ToastAction } from "../ui/toast";
 
 interface Props {
-  harga: number;
   id: number;
 }
 
-function FormBeli({ harga, id }: Props) {
+function FormBeli({ id }: Props) {
   const [jumlah, setJumlah] = useState<number>(1);
   const [alamat, setAlamat] = useState<string>("");
   const navigate = useNavigate();
+  const { toast } = useToast();
 
   const handleTambahJml = function () {
     setJumlah((cur) => cur + 1);
@@ -60,7 +63,27 @@ function FormBeli({ harga, id }: Props) {
       console.error(err);
       return;
     }
-    alert("Produk berhasil di tambah ke keranjang");
+    toast({
+      description: (
+        <div className="flex items-center gap-1">
+          <CheckCircleIcon className="size-8 text-green-500" />
+          <p className="text-xs">Produk berhasil disimpan di keranjang</p>
+        </div>
+      ),
+      action: (
+        <ToastAction
+          altText="Lihat keranjang"
+          className="overflow-hidden rounded border-0 bg-primary p-0 text-white hover:bg-primary"
+        >
+          <Link
+            to="/cart"
+            className="size-full content-center rounded px-2 text-sm"
+          >
+            Lihat keranjang
+          </Link>
+        </ToastAction>
+      ),
+    });
     setAlamat("");
   };
 

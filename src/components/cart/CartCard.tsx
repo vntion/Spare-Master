@@ -13,11 +13,6 @@ function CartCard({ product, onDelete }) {
 
   const handleDeleteCart = async function () {
     try {
-      const confirm = window.confirm(
-        "Apakah Anda yakin menghapus cart " + nama,
-      );
-
-      if (!confirm) return;
       const cookies = new Cookies().get("auth");
       const session = await decrypt(cookies);
 

@@ -4,21 +4,22 @@ import { DataProvider } from "./contexts/DataContext";
 import { SnackBarProvider } from "./contexts/SnackBarContext";
 import { ToggleFormProvider } from "./contexts/ToggleFormContext";
 import AdminLayout from "./pages/AdminLayout";
+import Cart from "./pages/Cart";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 import ProdukDetail from "./pages/ProdukDetail";
+import RiwayatPembelian from "./pages/RiwayatPembelian";
 import SearchProduk from "./pages/SearchProduk";
 import SignUp from "./pages/SignUp";
 import ThankYou from "./pages/ThankYou";
+import Account from "./routes/Account";
 import Dashboard from "./routes/Dashboard";
 import Pembelian from "./routes/Pembelian";
 import Produk from "./routes/Produk";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import User from "./routes/User";
-import Account from "./routes/Account";
-import Cart from "./pages/Cart";
-import RiwayatPembelian from "./pages/RiwayatPembelian";
+import { Toaster } from "./components/ui/toaster";
 
 function App() {
   return (
@@ -56,6 +57,7 @@ function App() {
           <Route path="thankyou" element={<ThankYou />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <Toaster />
       </BrowserRouter>
     </AuthProvider>
   );

@@ -4,27 +4,27 @@ import CartCard from "./CartCard";
 import { deleteAllCart, getCartByAkunId } from "../../services/apiCart";
 import { Cookies } from "react-cookie";
 import { decrypt } from "../../utils/session";
-import { CustomError } from "../../utils/helpers";
+import { CustomError, formatRupiah } from "../../utils/helpers";
 import { useNavigate } from "react-router-dom";
 import { CreatePembelian } from "../../utils/interfaces";
 import { createPembelian } from "../../services/apiPembelian";
+import AlertDialogUI from "@/ui/AlertDialogUI";
+import { useToast } from "@/hooks/use-toast";
 
 // CartList Component
 function CartList() {
   const [cart, setCart] = useState([]);
   const navigate = useNavigate();
+  const { toast } = useToast();
 
   const handleDeleteProduct = (id: string) => {
     setCart((cart) => cart.filter((cur) => cur.id !== id));
+    toast({
+      description: "1 produk telah dihapus.",
+    });
   };
 
   const handleClearCart = async () => {
-    const confirm = window.confirm(
-      "Apakah anda yakin ingin menghapus semua keranjang?",
-    );
-
-    if (!confirm) return;
-
     const cookie = new Cookies().get("auth");
     const session = await decrypt(cookie);
 
@@ -108,7 +108,7 @@ function CartList() {
         </div>
       ) : (
         <>
-          <div className="mb-6 max-h-[30rem] space-y-4 overflow-auto">
+          <div className="mb-6 max-h-[50rem] space-y-4 overflow-auto">
             {cart.map((cart) => (
               <CartCard
                 key={cart.id}
@@ -122,18 +122,24 @@ function CartList() {
             <div>
               <p className="text-gray-600">Total Belanja</p>
               <p className="text-2xl font-bold text-gray-800">
-                Rp {calculateTotal().toLocaleString()}
+                {formatRupiah(calculateTotal())}
               </p>
             </div>
 
             <div className="flex space-x-4">
-              <button
-                onClick={handleClearCart}
-                className="flex items-center space-x-2 rounded-md bg-red-500 px-4 py-2 text-white transition-colors hover:bg-red-600"
-              >
-                <TrashIcon className="h-5 w-5" />
-                <span>Hapus Semua</span>
-              </button>
+              <AlertDialogUI
+                openDialog={
+                  <button className="flex items-center space-x-2 rounded-md bg-red-500 px-4 py-2 text-white transition-colors hover:bg-red-600">
+                    <TrashIcon className="h-5 w-5" />
+                    <span>Hapus Semua</span>
+                  </button>
+                }
+                onContinue={handleClearCart}
+                cancel="Batal"
+                continueText="Hapus"
+                title="Apakah Anda yakin menghapus semua keranjang?"
+                description="Tindakan ini tidak dapat dibatalkan. Tindakan ini akan menghapus semua keranjang Anda secara permanen."
+              />
 
               <button
                 onClick={buyAllCart}
