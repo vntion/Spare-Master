@@ -13,7 +13,7 @@ function UpdateAdminPass() {
 
   const handleSubmit = async function (e: React.ChangeEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (!password || !confirmPass) return;
+    if (password !== confirmPass) return;
 
     const cookies = new Cookies().get("auth");
     const session = await decrypt(cookies);

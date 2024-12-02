@@ -4,11 +4,25 @@ import { ProdukActionProps } from "../../utils/interfaces";
 import { useData } from "../../contexts/DataContext";
 import { useToggleForm } from "../../contexts/ToggleFormContext";
 import AlertDialogUI from "@/ui/AlertDialogUI";
+import { useSnackBar } from "@/contexts/SnackBarContext";
+import { SnackBarStatus } from "@/utils/types";
 
 function ProdukAction({ produk }: ProdukActionProps) {
   const { onDeleteProduk } = useData();
   const { onCloseAction, onToggleOpen, onSelectProduk, onCurrOpenAct } =
     useToggleForm();
+
+  const { closeSnackBar, onSnackBarMsg, onSnackBarStatus, showSnackBar } =
+    useSnackBar();
+
+  const openSnackBar = function (msg: string, status: SnackBarStatus) {
+    closeSnackBar();
+    setTimeout(() => {
+      onSnackBarMsg(msg);
+      onSnackBarStatus(status);
+      showSnackBar();
+    }, 100);
+  };
 
   const handleDeleteProduk = async function () {
     try {
@@ -16,6 +30,7 @@ function ProdukAction({ produk }: ProdukActionProps) {
       onDeleteProduk(String(produk.id));
       onCloseAction();
       onCurrOpenAct(null);
+      openSnackBar("Produk berhasil dihapus", "success");
     } catch (err) {
       if (err instanceof Error) {
         console.error(err.message);
