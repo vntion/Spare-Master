@@ -91,9 +91,12 @@ To run this project, you will need to add the following environment variables to
 - **Thank you**: `/thankyou`
 - **404**: Page not found
 
-### Private Routes
+### Private Routes (Need Auth)
 
 - **Dashboard**: `/admin/dashboard`
 - **Pembelian**: `/admin/pembelian`
 - **Produk**: `/admin/produk`
 - **User**: `/admin/user`
+- **Account**: `/admin/account`
+- **Riwayat**: `/riwayat`
+- **Cart**: `/cart`
