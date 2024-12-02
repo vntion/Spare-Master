@@ -26,7 +26,7 @@ function Pembelian() {
         <TableBody>
           <Pagination msg="pembelian">
             {pembelian.map((item) => (
-              <PembelianRow pembelian={item} key={item.totalHarga} />
+              <PembelianRow pembelian={item} key={item.id} />
             ))}
           </Pagination>
         </TableBody>
