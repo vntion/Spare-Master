@@ -7,6 +7,7 @@ export interface CreatePembelian {
   alamat: string;
   produkId: number;
   akunId: number;
+  jumlahProduk: string;
 }
 
 export interface CreateProduk {
@@ -39,9 +40,12 @@ export interface UpdateAkunProps {
 }
 
 export interface Pembelian {
+  id: string;
   isPaid: string;
   alamat: string;
   totalHarga: string;
+  produkId: string;
+  hargaProduk: string;
   jumlahProduk: string;
   gambarProduk: string;
   produk: string;

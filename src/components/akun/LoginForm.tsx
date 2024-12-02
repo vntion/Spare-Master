@@ -127,7 +127,7 @@ function LoginForm() {
       </button>
 
       <p className="mt-2 text-center text-[0.78rem]">
-        Belum punya akun?{" "}
+        Belum punya akun?
         <Link to="/signup" className="text-blue-600">
           Buat akun
         </Link>

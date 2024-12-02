@@ -17,6 +17,8 @@ import Produk from "./routes/Produk";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import User from "./routes/User";
 import Account from "./routes/Account";
+import Cart from "./pages/Cart";
+import RiwayatPembelian from "./pages/RiwayatPembelian";
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
           <Route index element={<Home />} />
           <Route path="produk/:id" element={<ProdukDetail />} />
           <Route path="search/:query" element={<SearchProduk />} />
+          <Route path="cart" element={<Cart />} />
+          <Route path="riwayat" element={<RiwayatPembelian />} />
           <Route
             path="admin"
             element={

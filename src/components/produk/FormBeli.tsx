@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { Cookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
-import { createPembelian } from "../../services/apiPembelian";
-import { CreatePembelian } from "../../utils/interfaces";
+import { createCart } from "../../services/apiCart";
 import { decrypt } from "../../utils/session";
 
 interface Props {
@@ -46,24 +45,23 @@ function FormBeli({ harga, id }: Props) {
       return;
     }
 
-    const totalHarga: number = harga * jumlah;
     const akunId: number = Number(session.akun.id);
 
-    const newPembelian: CreatePembelian = {
-      isPaid: true,
-      totalHarga: totalHarga,
-      alamat,
+    const newCart = {
       produkId: id,
       akunId,
+      alamat,
+      quantity: jumlah,
     };
 
     try {
-      await createPembelian(newPembelian);
+      await createCart(newCart);
     } catch (err) {
       console.error(err);
       return;
     }
-    navigate("/thankyou");
+    alert("Produk berhasil di tambah ke keranjang");
+    setAlamat("");
   };
 
   return (
@@ -122,7 +120,7 @@ function FormBeli({ harga, id }: Props) {
         type="submit"
         className="w-full rounded-md bg-primary py-4 text-white hover:bg-primary/90"
       >
-        Beli produk
+        Tambah ke keranjang
       </button>
     </form>
   );

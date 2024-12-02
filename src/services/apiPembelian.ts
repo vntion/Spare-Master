@@ -1,5 +1,5 @@
 import { CustomError } from "../utils/helpers";
-import { CreatePembelian } from "../utils/interfaces";
+import { CreatePembelian, Pembelian } from "../utils/interfaces";
 
 export async function createPembelian(pembelian: CreatePembelian) {
   const res = await fetch("http://localhost/SpareMaster/api/pembelian", {
@@ -17,5 +17,13 @@ export async function createPembelian(pembelian: CreatePembelian) {
 export async function getAllPembelian() {
   const res = await fetch("http://localhost/SpareMaster/api/pembelian");
   const data = await res.json();
-  return data.data;
+  return data.data as Pembelian[];
+}
+
+export async function getPembelianByAkunId(id: string) {
+  const res = await fetch(
+    `http://localhost/SpareMaster/api/pembelian/?akun_id=${id}`,
+  );
+  const data = await res.json();
+  return data.data as Pembelian[];
 }

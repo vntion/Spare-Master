@@ -5,7 +5,7 @@ import { createAkun } from "../../services/apiAkun";
 import { CustomError } from "../../utils/helpers";
 import { useAuth } from "../../contexts/AuthContext";
 import { createSession } from "../../utils/session";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function SignUpForm() {
   const [nama, setNama] = useState<string>("");
@@ -136,6 +136,13 @@ function SignUpForm() {
       >
         Sign up
       </button>
+
+      <p className="mt-2 text-center text-[0.78rem]">
+        Sudah punya akun?
+        <Link to="/login" className="text-blue-600">
+          Login
+        </Link>
+      </p>
     </form>
   );
 }

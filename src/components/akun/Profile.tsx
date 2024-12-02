@@ -5,6 +5,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import { formatString } from "../../utils/helpers";
 import { decrypt } from "../../utils/session";
 import LogoutButton from "./LogoutButton";
+import { DocumentTextIcon, ShoppingBagIcon } from "@heroicons/react/24/outline";
 
 function Profile() {
   const { isAuthenticated, name, profile, onProfile } = useAuth();
@@ -32,7 +33,21 @@ function Profile() {
             <img src={profile} alt={name} className="size-8 rounded-full" />
             <span>{formattedName}</span>
           </div>
-          <LogoutButton color="black" />
+
+          <nav className="flex items-center">
+            <Link to="/cart" className="rounded-full p-1.5 hover:bg-primary/10">
+              <ShoppingBagIcon className="size-5 text-primary" />
+            </Link>
+
+            <Link
+              to="/riwayat"
+              className="rounded-full p-1.5 hover:bg-primary/10"
+            >
+              <DocumentTextIcon className="size-5 text-primary" />
+            </Link>
+
+            <LogoutButton color="blue" />
+          </nav>
         </>
       ) : (
         <>

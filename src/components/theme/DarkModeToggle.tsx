@@ -28,7 +28,10 @@ function DarkModeToggle() {
   }, []);
 
   return (
-    <button className="text-primary" onClick={handleToggleTheme}>
+    <button
+      className="rounded-full p-1.5 text-primary hover:bg-primary/10"
+      onClick={handleToggleTheme}
+    >
       {theme === "light" && <MoonIcon className="size-5" />}
       {theme === "dark" && <SunIcon className="size-5" />}
     </button>

@@ -15,7 +15,10 @@ function LogoutButton({ color }: LogoutBtnProps) {
   };
 
   return (
-    <button onClick={handleLogout}>
+    <button
+      onClick={handleLogout}
+      className="rounded-full p-1.5 hover:bg-primary/10"
+    >
       <ArrowRightStartOnRectangleIcon
         onClick={handleLogout}
         className={`size-5 ${color === "blue" ? "text-primary" : "text-black"}`}

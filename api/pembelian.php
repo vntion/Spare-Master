@@ -44,10 +44,13 @@ function getPembelian($CRUD, $akun_id)
 {
     $query = "
     SELECT 
+        pembelian.id,
         pembelian.isPaid, 
         pembelian.alamat, 
         pembelian.totalHarga, 
         pembelian.jumlahProduk,
+        produk.id AS produkId,
+        produk.harga AS hargaProduk,
         produk.nama AS produk, 
         produk.gambar AS gambarProduk,
         akun.nama AS pembeli, 

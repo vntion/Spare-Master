@@ -22,7 +22,7 @@ const ProductCard = ({ id, nama, harga, gambar }: Props) => {
       </div>
 
       <div className="flex flex-1 flex-col justify-between gap-3 p-4">
-        <h3 className="text-sm font-medium text-gray-900">{formattedNama}</h3>
+        <h3 className="text-sm text-gray-900">{formattedNama}</h3>
 
         <span className="text-lg font-semibold text-gray-900">
           {formattedHarga}

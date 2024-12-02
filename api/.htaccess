@@ -12,3 +12,7 @@ RewriteRule ^akun/([0-9]+)/?$ akun.php?email=$1&password=$1&akun_id=$1 [NC,L]
 RewriteRule ^pembelian/?$ pembelian.php [NC,L]
 RewriteRule ^pembelian/([0-9]+)/?$ pembelian.php?akun_id=$1 [NC,L]
 
+# Cart
+RewriteRule ^cart/?$ cart.php [NC,L]
+RewriteRule ^cart/([0-9]+)/?$ cart.php?akun_id=$1&?cart_id=$1 [NC,L]
+
