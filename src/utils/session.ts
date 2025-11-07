@@ -3,7 +3,7 @@ import { Cookies } from "react-cookie";
 import { Session, SessionAkun, SessionPayload } from "./interfaces";
 
 const secretKey: string = import.meta.env.VITE_SESSION_SECRET;
-const encodedKey = new TextEncoder().encode(secretKey);
+export const encodedKey = new TextEncoder().encode(secretKey);
 
 export async function encrypt(payload: SessionPayload) {
   const parsedPayload = { ...payload };
