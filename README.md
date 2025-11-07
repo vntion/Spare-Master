@@ -10,7 +10,7 @@ Spare Master is a simple online motorcycle/car spare parts store where users can
 - Rename project folder to `SpareMaster`
 
 > [!IMPORTANT]  
-> Your project must inside htdocs `C:\xampp\htdocs\SpareMaster`
+> Your project must inside htdocs `C:\xampp\htdocs`
 
 - Install dependencies this project
 
