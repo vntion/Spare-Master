@@ -69,7 +69,7 @@ Spare Master is a simple online motorcycle/car spare parts store where users can
 
 To run this project, you will need to add the following environment variables to your .env file
 
-`VITE_SESSION_KEY`
+`VITE_SESSION_SECRET`
 
 ## Tech Stack
 
