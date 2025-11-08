@@ -75,8 +75,38 @@ describe("getAllAkun function", () => {
   it("return semua akun yang ada", async () => {
     // Arrange
     const mockData = [
-      { id: "1", nama: "User 1" },
-      { id: "2", nama: "User 2" },
+      {
+        id: "1",
+        nama: "User 1",
+        email: "User1@gmail.com",
+        password: "user123",
+        role: "user",
+        profile: "https://i.pravatar.cc/1000?u=1",
+      },
+      {
+        id: "2",
+        nama: "User 2",
+        email: "User2@gmail.com",
+        password: "user123",
+        role: "user",
+        profile: "https://i.pravatar.cc/1000?u=1",
+      },
+      {
+        id: "3",
+        nama: "User 3",
+        email: "User3@gmail.com",
+        password: "user123",
+        role: "user",
+        profile: "https://i.pravatar.cc/1000?u=1",
+      },
+      {
+        id: "4",
+        nama: "User 4",
+        email: "User4@gmail.com",
+        password: "user123",
+        role: "user",
+        profile: "https://i.pravatar.cc/1000?u=1",
+      },
     ];
     mockFetch.mockResolvedValue({
       json: async () => ({ status: true, data: mockData }),
@@ -88,7 +118,6 @@ describe("getAllAkun function", () => {
 
     // Assert
     expect(result).toEqual(mockData);
-    expect(result).toHaveLength(2);
   });
 });
 
