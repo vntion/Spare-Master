@@ -36,6 +36,14 @@ Spare Master is a simple online motorcycle/car spare parts store where users can
   $ yarn build
 ```
 
+- Testing
+
+```bash
+  $ npm run test
+  # or
+  $ yarn test
+```
+
 - Happy coding!
 
 **Data**
