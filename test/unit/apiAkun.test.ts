@@ -8,7 +8,7 @@ import {
 import { CustomError } from "../../src/utils/helpers";
 import { SignUp, UpdateAkunProps } from "../../src/utils/interfaces";
 
-// --- Setup Global Mock untuk Fetch ---
+// --- Setup Global Mock Fetch ---
 const mockFetch = vi.fn();
 globalThis.fetch = mockFetch;
 
