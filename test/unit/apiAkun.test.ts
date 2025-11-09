@@ -42,16 +42,34 @@ afterEach(() => {
 
 describe("getAkun function", () => {
   it("return akun jika email dan password yang diberikan benar", async () => {
-    // Arrange
-    const mockData = { id: "1", email: "test@example.com", nama: "Tester" };
+    ////////////////
+    //  Arrange   //
+    ////////////////
+    const mockData = {
+      id: "1",
+      nama: "test",
+      email: "test@gmail.com",
+      password: "test",
+      role: "test",
+      profile: "https://i.pravatar.cc/1000?u=15",
+    };
+    const fakeGetAkunResponse = {
+      status: true,
+      data: [mockData],
+    };
+
     mockFetch.mockResolvedValue({
-      json: async () => ({ status: true, data: [mockData] }),
+      json: async () => fakeGetAkunResponse,
     });
 
-    // Act
+    ////////////////
+    //  Action   //
+    ////////////////
     const result = await getAkun("test@example.com", "password123");
 
-    // Assert
+    ////////////////
+    //  Assert   //
+    ////////////////
     expect(mockFetch).toHaveBeenCalledWith(
       expect.stringContaining("email=test@example.com"),
     );
@@ -59,12 +77,17 @@ describe("getAkun function", () => {
   });
 
   it("throw CustomError jika email atau password yang diberikan salah", async () => {
-    // Arrange
+    ////////////////
+    //  Arrange   //
+    ////////////////
+    const fakeFailedResponse = { status: false, data: [] };
     mockFetch.mockResolvedValue({
-      json: async () => ({ status: false, data: [] }),
+      json: async () => fakeFailedResponse,
     });
 
-    // Act & Assert
+    ////////////////
+    //  Assert   //
+    ////////////////
     await expect(getAkun("wrong@example.com", "wrongpass")).rejects.toThrow(
       CustomError,
     );
@@ -73,107 +96,119 @@ describe("getAkun function", () => {
 
 describe("getAllAkun function", () => {
   it("return semua akun yang ada", async () => {
-    // Arrange
+    ////////////////
+    //  Arrange   //
+    ////////////////
     const mockData = [
       {
-        id: "1",
-        nama: "User 1",
-        email: "User1@gmail.com",
-        password: "user123",
-        role: "user",
-        profile: "https://i.pravatar.cc/1000?u=1",
-      },
-      {
         id: "2",
-        nama: "User 2",
-        email: "User2@gmail.com",
-        password: "user123",
+        nama: "John Doe",
+        email: "johndoe@gmail.com",
+        password: "johndoe123",
         role: "user",
         profile: "https://i.pravatar.cc/1000?u=1",
       },
       {
         id: "3",
-        nama: "User 3",
-        email: "User3@gmail.com",
-        password: "user123",
+        nama: "Jane Smith",
+        email: "janesmith@gmail.com",
+        password: "janesmith123",
         role: "user",
-        profile: "https://i.pravatar.cc/1000?u=1",
+        profile: "https://i.pravatar.cc/1000?u=2",
       },
       {
         id: "4",
-        nama: "User 4",
-        email: "User4@gmail.com",
-        password: "user123",
+        nama: "Robert Brown",
+        email: "robertbrown@gmail.com",
+        password: "robertbrown123",
         role: "user",
-        profile: "https://i.pravatar.cc/1000?u=1",
+        profile: "https://i.pravatar.cc/1000?u=3",
       },
     ];
+
+    const fakeGetAllAkunResponse = { status: true, data: mockData };
     mockFetch.mockResolvedValue({
-      json: async () => ({ status: true, data: mockData }),
+      json: async () => fakeGetAllAkunResponse,
     });
 
-    // Act
+    ////////////////
+    //  Action   //
+    ////////////////
     const result = await getAllAkun();
-    console.log(result);
 
-    // Assert
+    ////////////////
+    //  Assert   //
+    ////////////////
     expect(result).toEqual(mockData);
   });
 });
 
 describe("createAkun function", () => {
   it("return hasil respon jika akun berhasil dibuat", async () => {
-    // Arrange
-    const newAkun: SignUp = {
+    ////////////////
+    //  Arrange   //
+    ////////////////
+    const mockNewAkun: SignUp = {
       nama: "New User",
       email: "new@example.com",
       password: "123",
       role: "user",
       profile: "img.jpg",
     };
-    const mockResponse = {
+    const fakeCreateAkunResponse = {
       status: true,
       message: "Akun berhasil dibuat",
-      data: { id: "99", ...newAkun },
+      data: { id: "99", ...mockNewAkun },
     };
 
     mockFetch.mockResolvedValue({
-      json: async () => mockResponse,
+      json: async () => fakeCreateAkunResponse,
     });
 
-    // Act
-    const result = await createAkun(newAkun);
+    ////////////////
+    //  Action   //
+    ////////////////
+    const result = await createAkun(mockNewAkun);
 
-    // Assert
+    ////////////////
+    //  Assert   //
+    ////////////////
     expect(mockFetch).toHaveBeenCalledWith(
       expect.any(String),
       expect.objectContaining({
         method: "POST",
-        body: JSON.stringify(newAkun),
+        body: JSON.stringify(mockNewAkun),
       }),
     );
-    expect(result).toEqual(mockResponse);
+    expect(result).toEqual(fakeCreateAkunResponse);
   });
 
-  it("trow CustomError jika akun gagal dibuat", async () => {
-    // Arrange
-    const newAkun = {} as SignUp; // Data dummy
+  it("throw CustomError jika akun gagal dibuat", async () => {
+    ////////////////
+    //  Arrange   //
+    ////////////////
+    const mockNewAkun = {} as SignUp;
+    const fakeFailedNewAkunRes = {
+      status: false,
+      message: "Invalid input data",
+    };
     mockFetch.mockResolvedValue({
-      json: async () => ({
-        status: false,
-        message: "Invalid input data",
-      }),
+      json: async () => fakeFailedNewAkunRes,
     });
 
-    // Act & Assert
-    await expect(createAkun(newAkun)).rejects.toThrow(CustomError);
-    await expect(createAkun(newAkun)).rejects.toThrow("Invalid input data");
+    ////////////////
+    //  Assert   //
+    ////////////////
+    await expect(createAkun(mockNewAkun)).rejects.toThrow(CustomError);
+    await expect(createAkun(mockNewAkun)).rejects.toThrow("Invalid input data");
   });
 });
 
 describe("updateAkun function", () => {
   it("return message jika akun berhasil diperbarui", async () => {
-    // Arrange
+    ////////////////
+    //  Arrange   //
+    ////////////////
     const updateData: UpdateAkunProps = { id: "1", nama: "Updated Name" };
     mockFetch.mockResolvedValue({
       json: async () => ({
@@ -182,10 +217,14 @@ describe("updateAkun function", () => {
       }),
     });
 
-    // Act
+    ////////////////
+    //  Action   //
+    ////////////////
     const result = await updateAkun(updateData);
 
-    // Assert
+    ////////////////
+    //  Assert   //
+    ////////////////
     expect(mockFetch).toHaveBeenCalledWith(
       expect.stringContaining("akun_id=1"),
       expect.objectContaining({ method: "PATCH" }),
@@ -194,7 +233,9 @@ describe("updateAkun function", () => {
   });
 
   it("throw CustomError jika akun gagal diperbarui", async () => {
-    // Arrange
+    ////////////////
+    //  Arrange   //
+    ////////////////
     const updateData: UpdateAkunProps = { id: "99" };
     mockFetch.mockResolvedValue({
       json: async () => ({
@@ -203,7 +244,9 @@ describe("updateAkun function", () => {
       }),
     });
 
-    // Act & Assert
+    ////////////////
+    //  Assert   //
+    ////////////////
     await expect(updateAkun(updateData)).rejects.toThrow(CustomError);
   });
 });

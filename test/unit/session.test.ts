@@ -1,5 +1,11 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { createSession, encodedKey, encrypt } from "../../src/utils/session";
+import {
+  createSession,
+  decrypt,
+  deleteSession,
+  encodedKey,
+  encrypt,
+} from "../../src/utils/session";
 import { SessionAkun, SessionPayload } from "../../src/utils/interfaces";
 import { jwtVerify } from "jose";
 
@@ -9,18 +15,27 @@ import { jwtVerify } from "jose";
  * - fungsi encrypt
  * - return JWT ketika input payload diberikan
  *
+ * - fungsi decrypt
+ * - return payload cookie yang sudah didekripsi dengan benar
+ * - return false saat cookie JWT tidak ada, kosong, atau invalid
+ *
  * - fungsi createSession
  * - membuat cookies baru saat payload diberikan dan tidak return apapun
+ *
+ * - fungsi deleteSession
+ * - menghapus session cookie 'auth' dengan benar
  */
 
 const mockSetCookies = vi.fn();
+const mockRemoveCookies = vi.fn();
+const mockGetCookies = vi.fn();
 
 vi.mock("react-cookie", () => {
   const MockCookies = function () {
     return {
       set: mockSetCookies,
-      get: vi.fn(),
-      remove: vi.fn(),
+      get: mockGetCookies,
+      remove: mockRemoveCookies,
     };
   };
 
@@ -29,30 +44,34 @@ vi.mock("react-cookie", () => {
   };
 });
 
+const fakeAkun: SessionAkun = {
+  id: "1",
+  nama: "test",
+  email: "test@gmail.com",
+  role: "user",
+  profile: "abc.com",
+};
+
+beforeEach(() => {
+  vi.clearAllMocks();
+});
+
 describe("encrypt function", () => {
   it("return JWT ketika input payload diberikan", async () => {
-    //////
-    //  Arrange
-    //////
+    ////////////////
+    //  Arrange   //
+    ////////////////
     const expiresAt = new Date(Date.now() + 1 * 24 * 60 * 60 * 1000);
-    const akun: SessionAkun = {
-      id: "1",
-      nama: "test",
-      email: "test@gmail.com",
-      role: "user",
-      profile: "abc.com",
-    };
+    const payload: SessionPayload = { akun: fakeAkun, expiresAt };
 
-    const payload: SessionPayload = { akun, expiresAt };
-
-    //////
-    //  Action
-    //////
+    ////////////////
+    //  Action   //
+    ////////////////
     const token = await encrypt(payload);
 
-    //////
-    //  Assert
-    //////
+    ////////////////
+    //  Assert   //
+    ////////////////
     expect(typeof token).toBe("string");
     expect(token).not.toBe("");
 
@@ -74,6 +93,57 @@ describe("encrypt function", () => {
   });
 });
 
+describe("decrypt function", () => {
+  it("return payload cookie yang sudah didekripsi dengan benar", async () => {
+    ////////////////
+    //  Arrange   //
+    ////////////////
+    const expiresAt = new Date(Date.now() + 1000 * 60 * 60); // 1 jam
+    const payload = { akun: fakeAkun, expiresAt };
+    const validToken = await encrypt(payload);
+
+    ////////////////
+    //  Action   //
+    ///////////////
+    const result = await decrypt(validToken);
+
+    ////////////////
+    //  Assert   //
+    ////////////////
+    expect(result).not.toBe(false);
+    if (result) {
+      expect(result.akun).toEqual(fakeAkun);
+      expect(new Date(result.expiresAt)).toEqual(expiresAt);
+      expect(result.exp).toEqual(expect.any(Number));
+      expect(result.iat).toEqual(expect.any(Number));
+    }
+  });
+
+  it("return false saat cookie JWT tidak ada, kosong, atau invalid", async () => {
+    ////////////////
+    //  Arrange   //
+    ////////////////
+    const emptyToken = "";
+    const formatIncorrectToken = "hello";
+    const incorrectToken =
+      "eyJhbGciOiJIUzI1NiJ9.eyJha3VuIjp7ImlkIjoxfX0.invalid_signature";
+
+    ////////////////
+    //  Action   //
+    ////////////////
+    const emptyResult = await decrypt(emptyToken);
+    const formatIncorrectResult = await decrypt(formatIncorrectToken);
+    const incorrectResult = await decrypt(incorrectToken);
+
+    ////////////////
+    //  Assert   //
+    ///////////////
+    expect(emptyResult).toBe(false);
+    expect(formatIncorrectResult).toBe(false);
+    expect(incorrectResult).toBe(false);
+  });
+});
+
 describe("createSession function", () => {
   beforeEach(() => {
     vi.useFakeTimers();
@@ -86,9 +156,9 @@ describe("createSession function", () => {
   });
 
   it("membuat cookies baru saat payload diberikan dan tidak return apapun", async () => {
-    //////
-    //  Arrange
-    //////
+    ////////////////
+    //  Arrange   //
+    ////////////////
     const mockDate = new Date("2024-01-01T00:00:00Z");
     vi.setSystemTime(mockDate);
 
@@ -104,14 +174,14 @@ describe("createSession function", () => {
       mockDate.getTime() + 1 * 24 * 60 * 60 * 1000,
     );
 
-    //////
-    //  Action
-    //////
+    ////////////////
+    //  Action   //
+    ///////////////
     await createSession(akun);
 
-    //////
-    //  Assert
-    //////
+    ////////////////
+    //  Assert   //
+    ////////////////
     expect(mockSetCookies).toHaveBeenCalledTimes(1);
     expect(mockSetCookies).toHaveBeenCalledWith(
       "auth",
@@ -124,5 +194,20 @@ describe("createSession function", () => {
         path: "/",
       },
     );
+  });
+});
+
+describe("deleteSession function", () => {
+  it("menghapus session cookie 'auth' dengan benar", async () => {
+    ////////////////
+    //  Action   //
+    ////////////////
+    await deleteSession();
+
+    ////////////////
+    //  Assert   //
+    ////////////////
+    expect(mockRemoveCookies).toHaveBeenCalledTimes(1);
+    expect(mockRemoveCookies).toBeCalledWith("auth");
   });
 });
